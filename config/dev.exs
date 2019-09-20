@@ -68,8 +68,8 @@ config :phoenix, :plug_init_mode, :runtime
 
 # Configure your database
 config :myexpenses_phx_v2, MyexpensesPhxV2.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "myexpenses_phx_v2_dev",
+  username: System.get_env("MYEXPENSES_PHX_V2_PG_USER"),
+  password: System.get_env("MYEXPENSES_PHX_V2_PG_PASSWORD"),
+  database: System.get_env("MYEXPENSES_PHX_V2_PG_DEV_DB"),
   hostname: "localhost",
   pool_size: 10

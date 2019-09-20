@@ -11,8 +11,8 @@ config :logger, level: :warn
 
 # Configure your database
 config :myexpenses_phx_v2, MyexpensesPhxV2.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "myexpenses_phx_v2_test",
+  username: System.get_env("MYEXPENSES_PHX_V2_PG_USER"),
+  password: System.get_env("MYEXPENSES_PHX_V2_PG_PASSWORD"),
+  database: System.get_env("MYEXPENSES_PHX_V2_PG_TEST_DB"),
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
