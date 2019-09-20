@@ -22,6 +22,7 @@ defmodule MyexpensesPhxV2.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import MyexpensesPhxV2.DataCase
+      import MyexpensesPhxV2.TestHelpers
     end
   end
 

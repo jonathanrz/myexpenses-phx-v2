@@ -21,6 +21,8 @@ defmodule MyexpensesPhxV2Web.ConnCase do
       use Phoenix.ConnTest
       alias MyexpensesPhxV2Web.Router.Helpers, as: Routes
 
+      import MyexpensesPhxV2.TestHelpers
+
       # The default endpoint for testing
       @endpoint MyexpensesPhxV2Web.Endpoint
     end
