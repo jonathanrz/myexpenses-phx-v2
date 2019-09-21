@@ -56,3 +56,63 @@ jobs: # basic units of work in a run
       - store_test_results: # upload junit test results for display in Test Summary
           # Read more: https://circleci.com/docs/2.0/collect-test-data/
           path: _build/test/lib/myexpenses_phx_v2
+  staging:
+    docker:
+      - image: buildpack-deps:trusty
+    working_directory: ~/app
+    steps:
+      - checkout
+      - run:
+          name: install heroku
+          command: |
+            bash .circleci/setup-heroku.sh
+      - deploy:
+          name: Deploy Master to Staging Heroku
+          command: |
+            git remote add heroku https://git.heroku.com/myexpenses-phx-v2-stg.git
+            git push heroku master
+
+  production:
+    docker:
+      - image: buildpack-deps:trusty
+    working_directory: ~/app
+    steps:
+      - checkout
+      - run:
+          name: install heroku
+          command: |
+            bash .circleci/setup-heroku.sh
+      - deploy:
+          name: Deploy Master to Production Heroku
+          command: |
+            git remote add heroku https://git.heroku.com/myexpenses-phx-v2-prd.git
+            git push heroku master
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - staging:
+          requires:
+            - lint
+            - test
+          filters:
+            branches:
+              only:
+                - master
+      - release:
+          type: approval
+          requires:
+            - staging
+          filters:
+            branches:
+              only:
+                - master
+      - production:
+          requires:
+            - release
+          filters:
+            branches:
+              only:
+                - master
