@@ -14,5 +14,5 @@ config :myexpenses_phx_v2, MyexpensesPhxV2Web.Endpoint,
 # Configure your database
 config :myexpenses_phx_v2, MyexpensesPhxV2.Repo,
   ssl: true,
-  url: database_url,
+  url: System.get_env("DATABASE_URL"),
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "15")
