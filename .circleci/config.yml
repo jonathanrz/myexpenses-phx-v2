@@ -95,8 +95,7 @@ workflows:
       - build
       - staging:
           requires:
-            - lint
-            - test
+            - build
           filters:
             branches:
               only:
