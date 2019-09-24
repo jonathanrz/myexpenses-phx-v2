@@ -1,19 +1,22 @@
 <header>
-  <section class="container">
-    <nav role="navigation">
-      <ul>
-        <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started!</a></li>
-      </ul>
+  <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper">
+        <div class="container">
+          <a href="#" class="brand-logo">Home</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>
+              <%= if @conn.assigns[:user] do %>
+                <%= link "Sign out", to: Routes.session_path(@conn, :delete) %>
+              <% else %>
+                <a href="/auth/google?scope=email%20profile" class="block mt-4 lg:inline-block lg:mt-0 text-grey-darkest mr-4 no-underline hover:underline">
+                  Sign in with Google
+                </a>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
-    <a href="http://phoenixframework.org/" class="phx-logo">
-      <img src="<%= Routes.static_path(@conn, "/images/phoenix.png") %>" alt="Phoenix Framework Logo"/>
-    </a>
-    <%= if @conn.assigns[:user] do %>
-      <%= link "Sign out", to: Routes.session_path(@conn, :delete) %>
-    <% else %>
-      <a href="/auth/google?scope=email%20profile" class="block mt-4 lg:inline-block lg:mt-0 text-grey-darkest mr-4 no-underline hover:underline">
-        Sign in with Google
-      </a>
-    <% end %>
-  </section>
+  </div>
 </header>
