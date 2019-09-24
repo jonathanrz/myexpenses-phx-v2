@@ -18,6 +18,7 @@ defmodule MyexpensesPhxV2Web.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    resources("/accounts", AccountController)
   end
 
   scope "/auth", MyexpensesPhxV2Web do
