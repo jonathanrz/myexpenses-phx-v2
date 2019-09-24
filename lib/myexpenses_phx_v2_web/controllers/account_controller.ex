@@ -4,6 +4,8 @@ defmodule MyexpensesPhxV2Web.AccountController do
   alias MyexpensesPhxV2.Data
   alias MyexpensesPhxV2.Data.Account
 
+  plug(MyexpensesPhxV2Web.Plugs.RequireAuth)
+
   def index(conn, _params) do
     accounts = Data.list_accounts()
     render(conn, "index.html", accounts: accounts)
