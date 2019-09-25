@@ -9,6 +9,8 @@ defmodule MyexpensesPhxV2.User do
     field :provider, :string
     field :token, :string
 
+    has_many(:accounts, MyexpensesPhxV2.Data.Account)
+
     timestamps()
   end
 
