@@ -18,7 +18,7 @@ defmodule MyexpensesPhxV2Web.AccountController do
   end
 
   def create(conn, %{"account" => account_params}) do
-    case Data.create_account(conn.assigns.user, account_params) do
+    case Data.create_account(account_params, conn.assigns.user) do
       {:ok, account} ->
         conn
         |> put_flash(:info, "Account created successfully.")

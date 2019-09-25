@@ -49,7 +49,7 @@ defmodule MyexpensesPhxV2.Data do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_account(user, attrs \\ %{}) do
+  def create_account(attrs \\ %{}, user) do
     user
     |> Ecto.build_assoc(:accounts)
     |> Account.changeset(attrs)
