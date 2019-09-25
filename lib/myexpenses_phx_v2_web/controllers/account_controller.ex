@@ -7,7 +7,7 @@ defmodule MyexpensesPhxV2Web.AccountController do
   plug(MyexpensesPhxV2Web.Plugs.RequireAuth)
 
   def index(conn, _params) do
-    accounts = Data.list_accounts()
+    accounts = Data.list_accounts(conn.assigns.user)
     render(conn, "index.html", accounts: accounts)
   end
 
@@ -17,7 +17,7 @@ defmodule MyexpensesPhxV2Web.AccountController do
   end
 
   def create(conn, %{"account" => account_params}) do
-    case Data.create_account(account_params) do
+    case Data.create_account(conn.assigns.user, account_params) do
       {:ok, account} ->
         conn
         |> put_flash(:info, "Account created successfully.")

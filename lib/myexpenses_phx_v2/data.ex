@@ -17,8 +17,8 @@ defmodule MyexpensesPhxV2.Data do
       [%Account{}, ...]
 
   """
-  def list_accounts do
-    Repo.all(Account)
+  def list_accounts(user) do
+    Repo.all(Ecto.assoc(user, :accounts))
   end
 
   @doc """
@@ -49,8 +49,9 @@ defmodule MyexpensesPhxV2.Data do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_account(attrs \\ %{}) do
-    %Account{}
+  def create_account(user, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:accounts)
     |> Account.changeset(attrs)
     |> Repo.insert()
   end
