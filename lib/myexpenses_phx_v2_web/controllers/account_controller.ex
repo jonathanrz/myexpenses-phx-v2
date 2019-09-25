@@ -5,6 +5,7 @@ defmodule MyexpensesPhxV2Web.AccountController do
   alias MyexpensesPhxV2.Data.Account
 
   plug(MyexpensesPhxV2Web.Plugs.RequireAuth)
+  plug(:check_account_owner when action not in [:index, :new, :create])
 
   def index(conn, _params) do
     accounts = Data.list_accounts(conn.assigns.user)
@@ -60,5 +61,18 @@ defmodule MyexpensesPhxV2Web.AccountController do
     conn
     |> put_flash(:info, "Account deleted successfully.")
     |> redirect(to: Routes.account_path(conn, :index))
+  end
+
+  def check_account_owner(conn, _params) do
+    %{params: %{"id" => id}} = conn
+
+    if Data.get_account!(id).user_id == conn.assigns.user.id do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You cannot access this account")
+      |> redirect(to: Routes.account_path(conn, :index))
+      |> halt()
+    end
   end
 end
