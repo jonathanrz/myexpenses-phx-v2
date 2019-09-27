@@ -12,3 +12,19 @@ import "phoenix_html";
 //
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
+
+import M from "materialize-css";
+
+document.addEventListener("DOMContentLoaded", function() {
+  M.AutoInit();
+  // const elems = document.querySelectorAll(".sidenav");
+  // const instances = M.Sidenav.init(elems);
+  // console.log({ instances });
+
+  // const menuButton = document.querySelector("#menu-button");
+  // menuButton.addEventListener("click", () => {
+  //   if (instances.length > 0) {
+  //     instances[0].open();
+  //   }
+  // });
+});
