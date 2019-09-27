@@ -2,11 +2,11 @@
   <div class="navbar-fixed">
     <nav>
       <div class="container nav-wrapper">
-          <a href="#" data-target="slide-out" class="sidenav-trigger">
-        <button id="menu-button" class="icon-button">
+        <a href="#" data-target="slide-out" class="sidenav-trigger">
+          <button id="menu-button" class="icon-button">
             <i class="material-icons">menu</i>
-        </button>
-          </a>
+          </button>
+        </a>
         <a href="/" class="brand-logo">Home</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li>
@@ -21,12 +21,12 @@
         </ul>
       </div>
     </nav>
-    <ul id="slide-out" class="sidenav">
-      <li>
-        <%= link to: Routes.account_path(@conn, :index) do %>
-          <i class="material-icons">money</i> Accounts
-        <% end %>
-      </li>
-    </ul>
   </div>
+  <ul id="slide-out" class="sidenav">
+    <li>
+      <%= link to: Routes.account_path(@conn, :index) do %>
+        <i class="material-icons">money</i> Accounts
+      <% end %>
+    </li>
+  </ul>
 </header>
