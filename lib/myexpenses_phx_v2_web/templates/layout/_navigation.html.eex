@@ -3,7 +3,7 @@
     <nav>
       <div class="container nav-wrapper">
         <a href="#" data-target="slide-out" class="sidenav-trigger">
-          <button id="menu-button" class="icon-button">
+          <button class="icon-button">
             <i class="material-icons">menu</i>
           </button>
         </a>
