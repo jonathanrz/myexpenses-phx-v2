@@ -12,3 +12,9 @@ import "phoenix_html";
 //
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
+
+import M from "materialize-css";
+
+document.addEventListener("DOMContentLoaded", function() {
+  M.AutoInit();
+});
