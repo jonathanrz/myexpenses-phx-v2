@@ -2,11 +2,13 @@
   <div class="navbar-fixed">
     <nav>
       <div class="container nav-wrapper">
-        <a href="#" data-target="slide-out" class="sidenav-trigger">
-          <button class="icon-button">
-            <i class="material-icons">menu</i>
-          </button>
-        </a>
+        <%= if @conn.assigns[:user] do %>
+          <a href="#" data-target="slide-out" class="sidenav-trigger">
+            <button class="icon-button">
+              <i class="material-icons">menu</i>
+            </button>
+          </a>
+        <% end %>
         <a href="/" class="brand-logo">Home</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li>
@@ -22,11 +24,24 @@
       </div>
     </nav>
   </div>
-  <ul id="slide-out" class="sidenav">
-    <li>
-      <%= link to: Routes.account_path(@conn, :index) do %>
-        <i class="material-icons">money</i> Accounts
-      <% end %>
-    </li>
-  </ul>
+  <%= if @conn.assigns[:user] do %>
+    <ul id="slide-out" class="sidenav">
+      <li>
+        <div class="user-view">
+          <div class="background">
+            <img src="images/hero_image.jpg">
+          </div>
+          <span class="white-text name">
+            <%= "#{@conn.assigns[:user].first_name} #{@conn.assigns[:user].last_name}" %>
+          </span>
+          <span class="white-text email"><%= @conn.assigns[:user].email %></span>
+        </div>
+      </li>
+      <li>
+        <%= link to: Routes.account_path(@conn, :index) do %>
+          <i class="material-icons">money</i> Accounts
+        <% end %>
+      </li>
+    </ul>
+  <% end %>
 </header>
