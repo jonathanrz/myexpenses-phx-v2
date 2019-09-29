@@ -9,7 +9,7 @@
             </button>
           </a>
         <% end %>
-        <a href="/" class="brand-logo">Home</a>
+        <div class="brand-logo"><%= @conn.assigns[:title] %></div>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li>
             <%= if @conn.assigns[:user] do %>
@@ -38,6 +38,9 @@
         </div>
       </li>
       <li>
+        <%= link to: Routes.page_path(@conn, :index) do %>
+          <i class="material-icons">home</i> Home
+        <% end %>
         <%= link to: Routes.account_path(@conn, :index) do %>
           <i class="material-icons">money</i> Accounts
         <% end %>
