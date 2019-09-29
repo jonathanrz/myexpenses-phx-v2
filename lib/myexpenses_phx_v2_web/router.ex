@@ -8,6 +8,7 @@ defmodule MyexpensesPhxV2Web.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug MyexpensesPhxV2Web.Plugs.SetUser
+    plug MyexpensesPhxV2Web.Plugs.SetTitle
   end
 
   pipeline :api do
