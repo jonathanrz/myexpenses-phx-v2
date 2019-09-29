@@ -5,15 +5,20 @@
     </div>
   <% end %>
 
-  <%= label f, :name %>
-  <%= text_input f, :name %>
-  <%= error_tag f, :name %>
+  <div class="input-field mb-2">
+    <%= label f, :name %>
+    <%= text_input f, :name %>
+    <%= error_tag f, :name %>
+  </div>
 
-  <%= label f, :balance %>
-  <%= number_input f, :balance %>
-  <%= error_tag f, :balance %>
+  <div class="input-field mb-2">
+    <%= label f, :balance %>
+    <%= number_input f, :balance %>
+    <%= error_tag f, :balance %>
+  </div>
 
-  <div>
-    <%= submit "Save" %>
+  <div class="right">
+    <%= button "Cancel", to: Routes.account_path(@conn, :index), method: "get", class: "waves-effect waves-teal btn-flat" %>
+    <%= submit "Save", class: "btn waves-effect waves-light" %>
   </div>
 <% end %>

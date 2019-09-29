@@ -29,7 +29,7 @@
       <li>
         <div class="user-view">
           <div class="background">
-            <img src="images/hero_image.jpg">
+            <img src="/images/hero_image.jpg">
           </div>
           <span class="white-text name">
             <%= "#{@conn.assigns[:user].first_name} #{@conn.assigns[:user].last_name}" %>
