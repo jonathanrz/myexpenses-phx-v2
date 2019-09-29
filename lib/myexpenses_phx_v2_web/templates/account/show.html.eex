@@ -1,7 +1,4 @@
-<h1>Show Account</h1>
-
-<ul>
-
+<ul class="mt-3">
   <li>
     <strong>Name:</strong>
     <%= @account.name %>
@@ -14,5 +11,5 @@
 
 </ul>
 
-<span><%= link "Edit", to: Routes.account_path(@conn, :edit, @account) %></span>
-<span><%= link "Back", to: Routes.account_path(@conn, :index) %></span>
+<%= button "Back", to: Routes.account_path(@conn, :index), class: "waves-effect waves-teal btn-flat" %>
+<%= button "Edit", to: Routes.account_path(@conn, :edit, @account), class: "btn waves-effect waves-light" %>
