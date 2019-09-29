@@ -13,6 +13,7 @@ defmodule MyexpensesPhxV2Web.AccountControllerTest do
   end
 
   describe "index" do
+    @tag :skip
     test "lists all accounts", %{conn: conn} do
       conn =
         conn
