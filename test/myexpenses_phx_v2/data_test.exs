@@ -64,4 +64,74 @@ defmodule MyexpensesPhxV2.DataTest do
       assert %Ecto.Changeset{} = Data.change_account(account)
     end
   end
+
+  describe "credit_cards" do
+    alias MyexpensesPhxV2.Data.CreditCard
+
+    @valid_attrs %{name: "some name"}
+    @update_attrs %{name: "some updated name"}
+    @invalid_attrs %{name: nil}
+
+    def credit_card_fixture(attrs \\ %{}) do
+      {:ok, credit_card} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Data.create_credit_card()
+
+      credit_card
+    end
+
+    @tag :skip
+    test "list_credit_cards/0 returns all credit_cards" do
+      credit_card = credit_card_fixture()
+      assert Data.list_credit_cards() == [credit_card]
+    end
+
+    @tag :skip
+    test "get_credit_card!/1 returns the credit_card with given id" do
+      credit_card = credit_card_fixture()
+      assert Data.get_credit_card!(credit_card.id) == credit_card
+    end
+
+    @tag :skip
+    test "create_credit_card/1 with valid data creates a credit_card" do
+      assert {:ok, %CreditCard{} = credit_card} = Data.create_credit_card(@valid_attrs)
+      assert credit_card.name == "some name"
+    end
+
+    @tag :skip
+    test "create_credit_card/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Data.create_credit_card(@invalid_attrs)
+    end
+
+    @tag :skip
+    test "update_credit_card/2 with valid data updates the credit_card" do
+      credit_card = credit_card_fixture()
+
+      assert {:ok, %CreditCard{} = credit_card} =
+               Data.update_credit_card(credit_card, @update_attrs)
+
+      assert credit_card.name == "some updated name"
+    end
+
+    @tag :skip
+    test "update_credit_card/2 with invalid data returns error changeset" do
+      credit_card = credit_card_fixture()
+      assert {:error, %Ecto.Changeset{}} = Data.update_credit_card(credit_card, @invalid_attrs)
+      assert credit_card == Data.get_credit_card!(credit_card.id)
+    end
+
+    @tag :skip
+    test "delete_credit_card/1 deletes the credit_card" do
+      credit_card = credit_card_fixture()
+      assert {:ok, %CreditCard{}} = Data.delete_credit_card(credit_card)
+      assert_raise Ecto.NoResultsError, fn -> Data.get_credit_card!(credit_card.id) end
+    end
+
+    @tag :skip
+    test "change_credit_card/1 returns a credit_card changeset" do
+      credit_card = credit_card_fixture()
+      assert %Ecto.Changeset{} = Data.change_credit_card(credit_card)
+    end
+  end
 end
