@@ -132,7 +132,10 @@ defmodule MyexpensesPhxV2.Data do
       ** (Ecto.NoResultsError)
 
   """
-  def get_credit_card!(id), do: Repo.get!(CreditCard, id)
+  def get_credit_card!(id) do
+    Repo.get!(CreditCard, id)
+    |> Repo.preload(:account)
+  end
 
   @doc """
   Creates a credit_card.

@@ -13,8 +13,10 @@ defmodule MyexpensesPhxV2Web.CreditCardController do
   end
 
   def new(conn, _params) do
+    accounts = load_accounts(conn)
+
     changeset = Data.change_credit_card(%CreditCard{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, accounts: accounts)
   end
 
   def create(conn, %{"credit_card" => credit_card_params}) do
@@ -36,8 +38,9 @@ defmodule MyexpensesPhxV2Web.CreditCardController do
 
   def edit(conn, %{"id" => id}) do
     credit_card = Data.get_credit_card!(id)
+    accounts = load_accounts(conn)
     changeset = Data.change_credit_card(credit_card)
-    render(conn, "edit.html", credit_card: credit_card, changeset: changeset)
+    render(conn, "edit.html", credit_card: credit_card, changeset: changeset, accounts: accounts)
   end
 
   def update(conn, %{"id" => id, "credit_card" => credit_card_params}) do
@@ -74,5 +77,10 @@ defmodule MyexpensesPhxV2Web.CreditCardController do
       |> redirect(to: Routes.credit_card_path(conn, :index))
       |> halt()
     end
+  end
+
+  def load_accounts(conn) do
+    Data.list_accounts(conn.assigns.user)
+    |> Enum.map(&{"#{&1.name}", &1.id})
   end
 end

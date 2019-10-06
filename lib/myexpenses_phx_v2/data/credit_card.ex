@@ -4,8 +4,8 @@ defmodule MyexpensesPhxV2.Data.CreditCard do
 
   schema "credit_cards" do
     field :name, :string
-    field :account_id, :id
-    field :user_id, :id
+    belongs_to(:account, MyexpensesPhxV2.Data.Account)
+    belongs_to(:user, MyexpensesPhxV2.Data.User)
 
     timestamps()
   end
@@ -13,7 +13,7 @@ defmodule MyexpensesPhxV2.Data.CreditCard do
   @doc false
   def changeset(credit_card, attrs) do
     credit_card
-    |> cast(attrs, [:name])
-    |> validate_required([:name])
+    |> cast(attrs, [:name, :account_id])
+    |> validate_required([:name, :account_id])
   end
 end

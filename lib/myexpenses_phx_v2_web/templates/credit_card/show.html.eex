@@ -3,8 +3,12 @@
     <strong>Name:</strong>
     <%= @credit_card.name %>
   </li>
+  <li>
+    <strong>Account:</strong>
+    <%= @credit_card.account.name %>
+  </li>
 
 </ul>
 
-<%= button "Back", to: Routes.credit_card_path(@conn, :index), class: "waves-effect waves-teal btn-flat" %>
-<%= button "Edit", to: Routes.credit_card_path(@conn, :edit, @credit_card), class: "btn waves-effect waves-light" %>
+<%= button "Back", to: Routes.credit_card_path(@conn, :index), method: "get", class: "waves-effect waves-teal btn-flat" %>
+<%= button "Edit", to: Routes.credit_card_path(@conn, :edit, @credit_card), method: "get", class: "btn waves-effect waves-light" %>

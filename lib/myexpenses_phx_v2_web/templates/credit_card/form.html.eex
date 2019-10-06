@@ -11,6 +11,12 @@
     <%= error_tag f, :name %>
   </div>
 
+  <div class="input-field mb-2">
+    <%= select f, :account_id, @accounts %>
+    <%= label f, :account_id %>
+    <%= error_tag f, :account_id %>
+  </div>
+
   <div class="right">
     <%= button "Cancel", to: Routes.credit_card_path(@conn, :index), method: "get", class: "waves-effect waves-teal btn-flat" %>
     <%= submit "Save", class: "btn waves-effect waves-light" %>
