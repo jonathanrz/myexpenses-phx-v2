@@ -1,7 +1,4 @@
-<h1>Show Credit card</h1>
-
-<ul>
-
+<ul class="mt-3">
   <li>
     <strong>Name:</strong>
     <%= @credit_card.name %>
@@ -9,5 +6,5 @@
 
 </ul>
 
-<span><%= link "Edit", to: Routes.credit_card_path(@conn, :edit, @credit_card) %></span>
-<span><%= link "Back", to: Routes.credit_card_path(@conn, :index) %></span>
+<%= button "Back", to: Routes.credit_card_path(@conn, :index), class: "waves-effect waves-teal btn-flat" %>
+<%= button "Edit", to: Routes.credit_card_path(@conn, :edit, @credit_card), class: "btn waves-effect waves-light" %>
