@@ -10,6 +10,7 @@ defmodule MyexpensesPhxV2.User do
     field :token, :string
 
     has_many(:accounts, MyexpensesPhxV2.Data.Account)
+    has_many(:credit_cards, MyexpensesPhxV2.Data.CreditCard)
 
     timestamps()
   end

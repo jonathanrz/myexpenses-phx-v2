@@ -44,6 +44,9 @@
         <%= link to: Routes.account_path(@conn, :index) do %>
           <i class="material-icons">money</i> Accounts
         <% end %>
+        <%= link to: Routes.credit_card_path(@conn, :index) do %>
+          <i class="material-icons">credit_card</i> Credit Cards
+        <% end %>
       </li>
     </ul>
   <% end %>

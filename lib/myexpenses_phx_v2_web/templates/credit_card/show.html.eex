@@ -1,0 +1,13 @@
+<h1>Show Credit card</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @credit_card.name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.credit_card_path(@conn, :edit, @credit_card) %></span>
+<span><%= link "Back", to: Routes.credit_card_path(@conn, :index) %></span>
