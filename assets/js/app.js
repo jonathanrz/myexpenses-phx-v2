@@ -17,4 +17,9 @@ import M from "materialize-css";
 
 document.addEventListener("DOMContentLoaded", function() {
   M.AutoInit();
+
+  const elems = document.querySelectorAll(".datepicker");
+  M.Datepicker.init(elems, {
+    format: "yyyy-mm-dd"
+  });
 });

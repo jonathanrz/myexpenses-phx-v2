@@ -13,13 +13,13 @@
 
   <div class="input-field mb-2">
     <%= label f, :init_date %>
-    <%= date_select f, :init_date %>
+    <%= text_input f, :init_date, class: "datepicker" %>
     <%= error_tag f, :init_date %>
   </div>
 
   <div class="input-field mb-2">
     <%= label f, :end_date %>
-    <%= date_select f, :end_date %>
+    <%= text_input f, :end_date, class: "datepicker" %>
     <%= error_tag f, :end_date %>
   </div>
 
