@@ -21,6 +21,7 @@ defmodule MyexpensesPhxV2Web.Router do
     get "/", PageController, :index
     resources("/accounts", AccountController)
     resources("/credit_cards", CreditCardController)
+    resources("/bills", BillController)
   end
 
   scope "/auth", MyexpensesPhxV2Web do
