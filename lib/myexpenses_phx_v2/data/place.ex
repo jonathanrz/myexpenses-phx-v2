@@ -4,7 +4,7 @@ defmodule MyexpensesPhxV2.Data.Place do
 
   schema "places" do
     field :name, :string
-    field :user_id, :id
+    belongs_to(:user, MyexpensesPhxV2.Data.User)
 
     timestamps()
   end

@@ -12,6 +12,7 @@ defmodule MyexpensesPhxV2.User do
     has_many(:accounts, MyexpensesPhxV2.Data.Account)
     has_many(:credit_cards, MyexpensesPhxV2.Data.CreditCard)
     has_many(:bills, MyexpensesPhxV2.Data.Bill)
+    has_many(:places, MyexpensesPhxV2.Data.Place)
 
     timestamps()
   end

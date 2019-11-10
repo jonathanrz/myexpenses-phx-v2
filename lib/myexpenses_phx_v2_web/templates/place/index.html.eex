@@ -1,26 +1,35 @@
-<h1>Listing Places</h1>
-
-<table>
+<table class="striped mt-3">
   <thead>
-    <tr>
-      <th>Name</th>
+    <tr class="row">
+      <th class="table-header col s8">Name</th>
 
-      <th></th>
+      <th class="col s4"></th>
     </tr>
   </thead>
   <tbody>
 <%= for place <- @places do %>
-    <tr>
-      <td><%= place.name %></td>
+    <tr class="row table-row">
+      <td class="col s8"><%= place.name %></td>
 
-      <td>
-        <span><%= link "Show", to: Routes.place_path(@conn, :show, place) %></span>
-        <span><%= link "Edit", to: Routes.place_path(@conn, :edit, place) %></span>
-        <span><%= link "Delete", to: Routes.place_path(@conn, :delete, place), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      <td class="col s4">
+        <span>
+          <%= link to: Routes.place_path(@conn, :edit, place), class: "table-link" do %>
+            <i class="material-icons">edit</i>
+          <% end %>
+        </span>
+        <span>
+          <%= link to: Routes.place_path(@conn, :delete, place), method: :delete, data: [confirm: "Are you sure?"], class: "table-link" do %>
+            <i class="material-icons">delete</i>
+          <% end %>
+        </span>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Place", to: Routes.place_path(@conn, :new) %></span>
+<span>
+  <%= link to: Routes.place_path(@conn, :new), class: "btn-floating btn-large waves-effect waves-light right" do %>
+    <i class="material-icons">add</i>
+  <% end %>
+</span>

@@ -4,8 +4,11 @@ defmodule MyexpensesPhxV2Web.PlaceController do
   alias MyexpensesPhxV2.Data
   alias MyexpensesPhxV2.Data.Place
 
+  plug(MyexpensesPhxV2Web.Plugs.RequireAuth)
+  plug(:check_place_owner when action not in [:index, :new, :create])
+
   def index(conn, _params) do
-    places = Data.list_places()
+    places = Data.list_places(conn.assigns.user)
     render(conn, "index.html", places: places)
   end
 
@@ -15,7 +18,7 @@ defmodule MyexpensesPhxV2Web.PlaceController do
   end
 
   def create(conn, %{"place" => place_params}) do
-    case Data.create_place(place_params) do
+    case Data.create_place(place_params, conn.assigns.user) do
       {:ok, place} ->
         conn
         |> put_flash(:info, "Place created successfully.")
@@ -58,5 +61,18 @@ defmodule MyexpensesPhxV2Web.PlaceController do
     conn
     |> put_flash(:info, "Place deleted successfully.")
     |> redirect(to: Routes.place_path(conn, :index))
+  end
+
+  def check_place_owner(conn, _params) do
+    %{params: %{"id" => id}} = conn
+
+    if Data.get_place!(id).user_id == conn.assigns.user.id do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You cannot access this place")
+      |> redirect(to: Routes.place_path(conn, :index))
+      |> halt()
+    end
   end
 end

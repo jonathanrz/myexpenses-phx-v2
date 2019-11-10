@@ -311,8 +311,8 @@ defmodule MyexpensesPhxV2.Data do
       [%Place{}, ...]
 
   """
-  def list_places do
-    Repo.all(Place)
+  def list_places(user) do
+    Repo.all(Ecto.assoc(user, :places))
   end
 
   @doc """
@@ -343,8 +343,9 @@ defmodule MyexpensesPhxV2.Data do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_place(attrs \\ %{}) do
-    %Place{}
+  def create_place(attrs \\ %{}, user) do
+    user
+    |> Ecto.build_assoc(:places)
     |> Place.changeset(attrs)
     |> Repo.insert()
   end
