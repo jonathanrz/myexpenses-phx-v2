@@ -22,6 +22,7 @@ defmodule MyexpensesPhxV2Web.Router do
     resources("/accounts", AccountController)
     resources("/credit_cards", CreditCardController)
     resources("/bills", BillController)
+    resources("/places", PlaceController)
   end
 
   scope "/auth", MyexpensesPhxV2Web do

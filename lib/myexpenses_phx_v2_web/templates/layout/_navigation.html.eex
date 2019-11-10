@@ -50,6 +50,9 @@
         <%= link to: Routes.bill_path(@conn, :index) do %>
           <i class="material-icons">date_range</i> Bills
         <% end %>
+        <%= link to: Routes.place_path(@conn, :index) do %>
+          <i class="material-icons">storefront</i> Places
+        <% end %>
       </li>
     </ul>
   <% end %>

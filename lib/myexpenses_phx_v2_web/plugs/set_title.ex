@@ -1,6 +1,5 @@
 defmodule MyexpensesPhxV2Web.Plugs.SetTitle do
   import Plug.Conn
-  import Phoenix.Controller
 
   def init(_params) do
   end
@@ -19,6 +18,10 @@ defmodule MyexpensesPhxV2Web.Plugs.SetTitle do
       ["bills", _id, "edit"] -> assign(conn, :title, "Edit Bill")
       ["bills", _id] -> assign(conn, :title, "Bills")
       ["bills" | _tail] -> assign(conn, :title, "Bills")
+      ["places", "new"] -> assign(conn, :title, "New Place")
+      ["places", _id, "edit"] -> assign(conn, :title, "Edit Place")
+      ["places", _id] -> assign(conn, :title, "Places")
+      ["places" | _tail] -> assign(conn, :title, "Places")
       _ -> assign(conn, :title, "My Expenses")
     end
   end

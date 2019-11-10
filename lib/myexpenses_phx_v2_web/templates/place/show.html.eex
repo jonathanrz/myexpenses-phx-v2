@@ -1,0 +1,11 @@
+<ul class="mt-3">
+
+  <li>
+    <strong>Name:</strong>
+    <%= @place.name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.place_path(@conn, :edit, @place), class: "waves-effect waves-teal btn-flat" %></span>
+<span><%= link "Back", to: Routes.place_path(@conn, :index), class: "btn waves-effect waves-light" %></span>
