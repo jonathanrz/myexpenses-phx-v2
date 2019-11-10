@@ -15,6 +15,10 @@ defmodule MyexpensesPhxV2Web.Plugs.SetTitle do
       ["credit_cards", _id, "edit"] -> assign(conn, :title, "Edit Credit Card")
       ["credit_cards", _id] -> assign(conn, :title, "Credit Cards")
       ["credit_cards" | _tail] -> assign(conn, :title, "Credit Cards")
+      ["bills", "new"] -> assign(conn, :title, "New Bill")
+      ["bills", _id, "edit"] -> assign(conn, :title, "Edit Bill")
+      ["bills", _id] -> assign(conn, :title, "Bills")
+      ["bills" | _tail] -> assign(conn, :title, "Bills")
       _ -> assign(conn, :title, "My Expenses")
     end
   end

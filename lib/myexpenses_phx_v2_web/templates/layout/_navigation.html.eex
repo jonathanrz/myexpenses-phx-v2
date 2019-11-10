@@ -47,6 +47,9 @@
         <%= link to: Routes.credit_card_path(@conn, :index) do %>
           <i class="material-icons">credit_card</i> Credit Cards
         <% end %>
+        <%= link to: Routes.bill_path(@conn, :index) do %>
+          <i class="material-icons">date_range</i> Bills
+        <% end %>
       </li>
     </ul>
   <% end %>

@@ -1,0 +1,31 @@
+<ul class="mt-3">
+
+  <li>
+    <strong>Name:</strong>
+    <%= @bill.name %>
+  </li>
+
+  <li>
+    <strong>Init date:</strong>
+    <%= @bill.init_date %>
+  </li>
+
+  <li>
+    <strong>End date:</strong>
+    <%= @bill.end_date %>
+  </li>
+
+  <li>
+    <strong>Value:</strong>
+    <%= @bill.value %>
+  </li>
+
+  <li>
+    <strong>Due day:</strong>
+    <%= @bill.due_day %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.bill_path(@conn, :edit, @bill), class: "waves-effect waves-teal btn-flat" %></span>
+<span><%= link "Back", to: Routes.bill_path(@conn, :index), class: "btn waves-effect waves-light" %></span>
