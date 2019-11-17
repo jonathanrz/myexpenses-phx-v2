@@ -1,0 +1,11 @@
+<ul class="mt-3">
+
+  <li>
+    <strong>Name:</strong>
+    <%= @category.name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.category_path(@conn, :edit, @category), class: "waves-effect waves-teal btn-flat" %></span>
+<span><%= link "Back", to: Routes.category_path(@conn, :index), class: "btn waves-effect waves-light" %></span>
