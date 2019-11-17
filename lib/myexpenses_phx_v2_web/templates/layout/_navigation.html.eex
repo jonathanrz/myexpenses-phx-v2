@@ -53,6 +53,9 @@
         <%= link to: Routes.place_path(@conn, :index) do %>
           <i class="material-icons">storefront</i> Places
         <% end %>
+        <%= link to: Routes.category_path(@conn, :index) do %>
+          <i class="material-icons">category</i> Categories
+        <% end %>
       </li>
     </ul>
   <% end %>

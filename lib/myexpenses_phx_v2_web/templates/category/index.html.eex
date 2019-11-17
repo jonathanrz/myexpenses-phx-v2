@@ -7,22 +7,22 @@
     </tr>
   </thead>
   <tbody>
-<%= for place <- @places do %>
+<%= for category <- @categories do %>
     <tr class="row table-row">
       <td class="col s8">
         <span>
-          <%= link place.name, to: Routes.place_path(@conn, :show, place), class: "table-link" %>
+          <%= link category.name, to: Routes.category_path(@conn, :show, category), class: "table-link" %>
         </span>
       </td>
 
       <td class="col s4">
         <span>
-          <%= link to: Routes.place_path(@conn, :edit, place), class: "table-link" do %>
+          <%= link to: Routes.category_path(@conn, :edit, category), class: "table-link" do %>
             <i class="material-icons">edit</i>
           <% end %>
         </span>
         <span>
-          <%= link to: Routes.place_path(@conn, :delete, place), method: :delete, data: [confirm: "Are you sure?"], class: "table-link" do %>
+          <%= link to: Routes.category_path(@conn, :delete, category), method: :delete, data: [confirm: "Are you sure?"], class: "table-link" do %>
             <i class="material-icons">delete</i>
           <% end %>
         </span>
@@ -33,7 +33,7 @@
 </table>
 
 <span>
-  <%= link to: Routes.place_path(@conn, :new), class: "btn-floating btn-large waves-effect waves-light right" do %>
+  <%= link to: Routes.category_path(@conn, :new), class: "btn-floating btn-large waves-effect waves-light right" do %>
     <i class="material-icons">add</i>
   <% end %>
 </span>
