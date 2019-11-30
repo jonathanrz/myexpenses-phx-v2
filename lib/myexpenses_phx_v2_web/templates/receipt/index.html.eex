@@ -1,0 +1,41 @@
+<table class="striped mt-3">
+  <thead>
+    <tr class="row">
+      <th class="table-header col s3">Name</th>
+      <th class="table-header col s3">Date</th>
+      <th class="table-header col s2">Value</th>
+      <th class="table-header col s2">Confirmed</th>
+
+      <th class="col s2"></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for receipt <- @receipts do %>
+    <tr class="row table-row">
+      <td class="col s3"><%= receipt.name %></td>
+      <td class="col s3"><%= receipt.date %></td>
+      <td class="col s2"><%= receipt.value %></td>
+      <td class="col s2"><%= receipt.confirmed %></td>
+
+      <td class="col s2">
+        <span>
+          <%= link to: Routes.receipt_path(@conn, :edit, receipt), class: "table-link" do %>
+            <i class="material-icons">edit</i>
+          <% end %>
+        </span>
+        <span>
+          <%= link to: Routes.receipt_path(@conn, :delete, receipt), method: :delete, data: [confirm: "Are you sure?"], class: "table-link" do %>
+            <i class="material-icons">delete</i>
+          <% end %>
+        </span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span>
+  <%= link to: Routes.receipt_path(@conn, :new), class: "btn-floating btn-large waves-effect waves-light right" do %>
+    <i class="material-icons">add</i>
+  <% end %>
+</span>

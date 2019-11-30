@@ -1,0 +1,26 @@
+<ul class="mt-3">
+
+  <li>
+    <strong>Name:</strong>
+    <%= @receipt.name %>
+  </li>
+
+  <li>
+    <strong>Date:</strong>
+    <%= @receipt.date %>
+  </li>
+
+  <li>
+    <strong>Value:</strong>
+    <%= @receipt.value %>
+  </li>
+
+  <li>
+    <strong>Confirmed:</strong>
+    <%= @receipt.confirmed %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.receipt_path(@conn, :edit, @receipt), class: "waves-effect waves-teal btn-flat" %></span>
+<span><%= link "Back", to: Routes.receipt_path(@conn, :index), class: "waves-effect waves-teal btn-flat" %></span>

@@ -14,6 +14,7 @@ defmodule MyexpensesPhxV2.User do
     has_many(:bills, MyexpensesPhxV2.Data.Bill)
     has_many(:places, MyexpensesPhxV2.Data.Place)
     has_many(:categories, MyexpensesPhxV2.Data.Category)
+    has_many(:receipts, MyexpensesPhxV2.Data.Receipt)
 
     timestamps()
   end
