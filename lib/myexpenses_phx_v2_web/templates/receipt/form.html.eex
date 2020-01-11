@@ -31,7 +31,7 @@
 
   <div class="input-field mb-2">
     <label>
-      <%= checkbox f, :confirmed %>
+      <%= unless @receipt.confirmed do checkbox f, :confirmed  end %>
       <span>Confirmed</span>
     <label>
     <%= error_tag f, :confirmed %>

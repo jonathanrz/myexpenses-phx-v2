@@ -8,6 +8,8 @@ defmodule MyexpensesPhxV2.Data do
 
   alias MyexpensesPhxV2.Data.Account
 
+  require Logger
+
   @doc """
   Returns the list of accounts.
 
@@ -559,6 +561,8 @@ defmodule MyexpensesPhxV2.Data do
 
   """
   def update_receipt(%Receipt{} = receipt, attrs) do
+    Logger.debug "receipt: #{inspect(receipt)}"
+    Logger.debug "attrs: #{inspect(attrs)}"
     receipt
     |> Receipt.changeset(attrs)
     |> Repo.update()

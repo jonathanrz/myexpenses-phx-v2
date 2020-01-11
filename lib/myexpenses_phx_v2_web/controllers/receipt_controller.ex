@@ -13,9 +13,10 @@ defmodule MyexpensesPhxV2Web.ReceiptController do
   end
 
   def new(conn, _params) do
+    receipt = %Receipt{}
     accounts = load_accounts(conn)
-    changeset = Data.change_receipt(%Receipt{})
-    render(conn, "new.html", changeset: changeset, accounts: accounts)
+    changeset = Data.change_receipt(receipt)
+    render(conn, "new.html", changeset: changeset, accounts: accounts, receipt: receipt)
   end
 
   def create(conn, %{"receipt" => receipt_params}) do
