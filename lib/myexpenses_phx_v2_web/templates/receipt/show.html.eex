@@ -20,6 +20,10 @@
     <%= @receipt.confirmed %>
   </li>
 
+  <li>
+    <strong>Account:</strong>
+    <%= @receipt.account.name %>
+  </li>
 </ul>
 
 <span><%= link "Edit", to: Routes.receipt_path(@conn, :edit, @receipt), class: "waves-effect waves-teal btn-flat" %></span>

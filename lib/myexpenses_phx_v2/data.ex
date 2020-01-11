@@ -116,6 +116,7 @@ defmodule MyexpensesPhxV2.Data do
   """
   def list_credit_cards(user) do
     Repo.all(Ecto.assoc(user, :credit_cards))
+    |> Repo.preload(:account)
   end
 
   @doc """
@@ -507,6 +508,7 @@ defmodule MyexpensesPhxV2.Data do
   """
   def list_receipts(user) do
     Repo.all(Ecto.assoc(user, :receipts))
+    |> Repo.preload(:account)
   end
 
   @doc """
@@ -523,7 +525,7 @@ defmodule MyexpensesPhxV2.Data do
       ** (Ecto.NoResultsError)
 
   """
-  def get_receipt!(id), do: Repo.get!(Receipt, id)
+  def get_receipt!(id), do: Repo.get!(Receipt, id) |> Repo.preload(:account)
 
   @doc """
   Creates a receipt.
@@ -540,7 +542,7 @@ defmodule MyexpensesPhxV2.Data do
   def create_receipt(attrs \\ %{}, user) do
     user
     |> Ecto.build_assoc(:receipts)
-    |> Category.changeset(attrs)
+    |> Receipt.changeset(attrs)
     |> Repo.insert()
   end
 

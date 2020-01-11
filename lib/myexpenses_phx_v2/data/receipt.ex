@@ -16,7 +16,7 @@ defmodule MyexpensesPhxV2.Data.Receipt do
   @doc false
   def changeset(receipt, attrs) do
     receipt
-    |> cast(attrs, [:name, :date, :value, :confirmed])
-    |> validate_required([:name, :date, :value, :confirmed])
+    |> cast(attrs, [:name, :date, :value, :confirmed, :account_id])
+    |> validate_required([:name, :date, :value, :confirmed, :account_id])
   end
 end

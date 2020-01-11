@@ -52,7 +52,7 @@ defmodule MyexpensesPhxV2Web.ReceiptController do
         |> redirect(to: Routes.receipt_path(conn, :show, receipt))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", receipt: receipt, changeset: changeset)
+        render(conn, "edit.html", receipt: receipt, changeset: changeset, accounts: load_accounts(conn))
     end
   end
 
