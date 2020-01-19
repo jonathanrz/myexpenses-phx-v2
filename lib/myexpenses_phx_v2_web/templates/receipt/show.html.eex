@@ -26,5 +26,5 @@
   </li>
 </ul>
 
-<span><%= link "Edit", to: Routes.receipt_path(@conn, :edit, @receipt), class: "waves-effect waves-teal btn-flat" %></span>
 <span><%= link "Back", to: Routes.receipt_path(@conn, :index), class: "waves-effect waves-teal btn-flat" %></span>
+<span><%= link "Edit", to: Routes.receipt_path(@conn, :edit, @receipt), class: "btn waves-effect waves-light" %></span>

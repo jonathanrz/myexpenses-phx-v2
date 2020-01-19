@@ -602,4 +602,11 @@ defmodule MyexpensesPhxV2.Data do
     |> Multi.update(:receipt, Receipt.changeset(receipt, %{confirmed: true}))
     |> Repo.transaction()
   end
+
+  def unconfirm_receipt(receipt) do
+    Multi.new()
+    |> Multi.update(:account, Account.changeset(receipt.account, %{balance: receipt.account.balance - receipt.value}))
+    |> Multi.update(:receipt, Receipt.changeset(receipt, %{confirmed: false}))
+    |> Repo.transaction()
+  end
 end

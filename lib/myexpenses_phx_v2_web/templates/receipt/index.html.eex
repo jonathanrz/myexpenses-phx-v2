@@ -19,14 +19,16 @@
         </span>
       </td>
       <td class="col s2"><%= receipt.date %></td>
-      <td class="col s2"><%= receipt.value %></td>
+      <td class="col s2"><%= Number.Currency.number_to_currency(receipt.value / 100) %></td>
       <td class="col s2">
-        <%= link to: Routes.receipt_path(@conn, :confirm, receipt), method: :post, class: "btn" do %>
-          Confirm
+        <%= link to: Routes.receipt_path(@conn, if receipt.confirmed do :unconfirm else :confirm end, receipt), method: :post, class: (if receipt.confirmed do "btn red" else "btn green" end) do %>
+          <%= if receipt.confirmed do "Unconfirm" else "Confirm" end %>
         <% end %>
       </td>
       <td class="col s2">
-        <%= receipt.account.name %>
+        <span>
+          <%= link receipt.account.name, to: Routes.account_path(@conn, :show, receipt.account), class: "table-link" %>
+        </span>
       </td>
 
       <td class="col s2">
