@@ -2,6 +2,7 @@
   <thead>
     <tr class="row">
       <th class="table-header col s5">Name</th>
+      <th class="table-header col s5">Account</th>
 
       <th class="col s2"></th>
     </tr>
@@ -13,6 +14,10 @@
         <span>
           <%= link credit_card.name, to: Routes.credit_card_path(@conn, :show, credit_card), class: "table-link" %>
         </span>
+      </td>
+
+      <td class="col s5">
+        <%= credit_card.account.name %>
       </td>
 
       <td class="col s2">

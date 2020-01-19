@@ -11,5 +11,6 @@
 
 </ul>
 
-<%= button "Back", to: Routes.account_path(@conn, :index), class: "waves-effect waves-teal btn-flat" %>
-<%= button "Edit", to: Routes.account_path(@conn, :edit, @account), class: "btn waves-effect waves-light" %>
+<span><%= link "Back", to: Routes.account_path(@conn, :index), class: "waves-effect waves-teal btn-flat" %></span>
+<span><%= link "Edit", to: Routes.account_path(@conn, :edit, @account), class: "btn waves-effect waves-light" %></span>
+

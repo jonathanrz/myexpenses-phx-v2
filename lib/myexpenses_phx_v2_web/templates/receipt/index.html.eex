@@ -1,0 +1,55 @@
+<table class="striped mt-3">
+  <thead>
+    <tr class="row">
+      <th class="table-header col s2">Name</th>
+      <th class="table-header col s2">Date</th>
+      <th class="table-header col s2">Value</th>
+      <th class="table-header col s2">Confirmed</th>
+      <th class="table-header col s2">Account</th>
+
+      <th class="col s2"></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for receipt <- @receipts do %>
+    <tr class="row table-row">
+      <td class="col s2">
+        <span>
+          <%= link receipt.name, to: Routes.receipt_path(@conn, :show, receipt), class: "table-link" %>
+        </span>
+      </td>
+      <td class="col s2"><%= receipt.date %></td>
+      <td class="col s2"><%= Number.Currency.number_to_currency(receipt.value / 100) %></td>
+      <td class="col s2">
+        <%= link to: Routes.receipt_path(@conn, if receipt.confirmed do :unconfirm else :confirm end, receipt), method: :post, class: (if receipt.confirmed do "btn red" else "btn green" end) do %>
+          <%= if receipt.confirmed do "Unconfirm" else "Confirm" end %>
+        <% end %>
+      </td>
+      <td class="col s2">
+        <span>
+          <%= link receipt.account.name, to: Routes.account_path(@conn, :show, receipt.account), class: "table-link" %>
+        </span>
+      </td>
+
+      <td class="col s2">
+        <span>
+          <%= link to: Routes.receipt_path(@conn, :edit, receipt), class: "table-link" do %>
+            <i class="material-icons">edit</i>
+          <% end %>
+        </span>
+        <span>
+          <%= link to: Routes.receipt_path(@conn, :delete, receipt), method: :delete, data: [confirm: "Are you sure?"], class: "table-link" do %>
+            <i class="material-icons">delete</i>
+          <% end %>
+        </span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span>
+  <%= link to: Routes.receipt_path(@conn, :new), class: "btn-floating btn-large waves-effect waves-light right" do %>
+    <i class="material-icons">add</i>
+  <% end %>
+</span>

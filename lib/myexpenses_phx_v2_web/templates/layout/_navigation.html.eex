@@ -56,6 +56,9 @@
         <%= link to: Routes.category_path(@conn, :index) do %>
           <i class="material-icons">category</i> Categories
         <% end %>
+        <%= link to: Routes.receipt_path(@conn, :index) do %>
+          <i class="material-icons">attach_money</i> Receipts
+        <% end %>
       </li>
     </ul>
   <% end %>

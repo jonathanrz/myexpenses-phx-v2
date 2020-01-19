@@ -355,4 +355,77 @@ defmodule MyexpensesPhxV2.DataTest do
       assert %Ecto.Changeset{} = Data.change_category(category)
     end
   end
+
+  describe "receipts" do
+    alias MyexpensesPhxV2.Data.Receipt
+
+    @valid_attrs %{confirmed: true, date: ~D[2010-04-17], name: "some name", value: 42}
+    @update_attrs %{confirmed: false, date: ~D[2011-05-18], name: "some updated name", value: 43}
+    @invalid_attrs %{confirmed: nil, date: nil, name: nil, value: nil}
+
+    def receipt_fixture(attrs \\ %{}) do
+      {:ok, receipt} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Data.create_receipt()
+
+      receipt
+    end
+
+    @tag :skip
+    test "list_receipts/0 returns all receipts" do
+      receipt = receipt_fixture()
+      assert Data.list_receipts() == [receipt]
+    end
+
+    @tag :skip
+    test "get_receipt!/1 returns the receipt with given id" do
+      receipt = receipt_fixture()
+      assert Data.get_receipt!(receipt.id) == receipt
+    end
+
+    @tag :skip
+    test "create_receipt/1 with valid data creates a receipt" do
+      assert {:ok, %Receipt{} = receipt} = Data.create_receipt(@valid_attrs)
+      assert receipt.confirmed == true
+      assert receipt.date == ~D[2010-04-17]
+      assert receipt.name == "some name"
+      assert receipt.value == 42
+    end
+
+    @tag :skip
+    test "create_receipt/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Data.create_receipt(@invalid_attrs)
+    end
+
+    @tag :skip
+    test "update_receipt/2 with valid data updates the receipt" do
+      receipt = receipt_fixture()
+      assert {:ok, %Receipt{} = receipt} = Data.update_receipt(receipt, @update_attrs)
+      assert receipt.confirmed == false
+      assert receipt.date == ~D[2011-05-18]
+      assert receipt.name == "some updated name"
+      assert receipt.value == 43
+    end
+
+    @tag :skip
+    test "update_receipt/2 with invalid data returns error changeset" do
+      receipt = receipt_fixture()
+      assert {:error, %Ecto.Changeset{}} = Data.update_receipt(receipt, @invalid_attrs)
+      assert receipt == Data.get_receipt!(receipt.id)
+    end
+
+    @tag :skip
+    test "delete_receipt/1 deletes the receipt" do
+      receipt = receipt_fixture()
+      assert {:ok, %Receipt{}} = Data.delete_receipt(receipt)
+      assert_raise Ecto.NoResultsError, fn -> Data.get_receipt!(receipt.id) end
+    end
+
+    @tag :skip
+    test "change_receipt/1 returns a receipt changeset" do
+      receipt = receipt_fixture()
+      assert %Ecto.Changeset{} = Data.change_receipt(receipt)
+    end
+  end
 end
