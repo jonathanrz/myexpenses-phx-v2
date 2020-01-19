@@ -4,6 +4,7 @@ defmodule MyexpensesPhxV2.Data do
   """
 
   import Ecto.Query, warn: false
+  alias Ecto.Multi
   alias MyexpensesPhxV2.Repo
 
   alias MyexpensesPhxV2.Data.Account
@@ -561,8 +562,6 @@ defmodule MyexpensesPhxV2.Data do
 
   """
   def update_receipt(%Receipt{} = receipt, attrs) do
-    Logger.debug "receipt: #{inspect(receipt)}"
-    Logger.debug "attrs: #{inspect(attrs)}"
     receipt
     |> Receipt.changeset(attrs)
     |> Repo.update()
@@ -595,5 +594,12 @@ defmodule MyexpensesPhxV2.Data do
   """
   def change_receipt(%Receipt{} = receipt) do
     Receipt.changeset(receipt, %{})
+  end
+
+  def confirm_receipt(receipt) do
+    Multi.new()
+    |> Multi.update(:account, Account.changeset(receipt.account, %{balance: receipt.account.balance + receipt.value}))
+    |> Multi.update(:receipt, Receipt.changeset(receipt, %{confirmed: true}))
+    |> Repo.transaction()
   end
 end

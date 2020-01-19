@@ -20,7 +20,11 @@
       </td>
       <td class="col s2"><%= receipt.date %></td>
       <td class="col s2"><%= receipt.value %></td>
-      <td class="col s2"><%= receipt.confirmed %></td>
+      <td class="col s2">
+        <%= link to: Routes.receipt_path(@conn, :confirm, receipt), method: :post, class: "btn" do %>
+          Confirm
+        <% end %>
+      </td>
       <td class="col s2">
         <%= receipt.account.name %>
       </td>

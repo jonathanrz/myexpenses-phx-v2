@@ -29,14 +29,6 @@
     <%= error_tag f, :account_id %>
   </div>
 
-  <div class="input-field mb-2">
-    <label>
-      <%= unless @receipt.confirmed do checkbox f, :confirmed  end %>
-      <span>Confirmed</span>
-    <label>
-    <%= error_tag f, :confirmed %>
-  </div>
-
   <div class="right">
     <%= button "Cancel", to: Routes.receipt_path(@conn, :index), method: "get", class: "waves-effect waves-teal btn-flat" %>
     <%= submit "Save", class: "btn waves-effect waves-light" %>

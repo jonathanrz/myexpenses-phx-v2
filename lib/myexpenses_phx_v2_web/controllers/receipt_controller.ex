@@ -66,6 +66,15 @@ defmodule MyexpensesPhxV2Web.ReceiptController do
     |> redirect(to: Routes.receipt_path(conn, :index))
   end
 
+  def confirm(conn, %{"id" => id}) do
+    receipt = Data.get_receipt!(id)
+
+    {:ok, _receipt} = Data.confirm_receipt(receipt)
+    conn
+    |> put_flash(:info, "Receipt confirmed successfully.")
+    |> redirect(to: Routes.receipt_path(conn, :index))
+  end
+
   def check_receipt_owner(conn, _params) do
     %{params: %{"id" => id}} = conn
 
