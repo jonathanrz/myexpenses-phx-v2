@@ -1,0 +1,67 @@
+<table class="striped mt-3">
+  <thead>
+    <tr class="row">
+      <th class="table-header col s2">Name</th>
+      <th class="table-header col s2">Date</th>
+      <th class="table-header col s2">Value</th>
+      <th class="table-header col s2">Paid with</th>
+      <th class="table-header col s1">Place</th>
+      <th class="table-header col s1">Bill</th>
+      <th class="table-header col s1">Category</th>
+
+      <th class="table-header col s1"></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for expense <- @expenses do %>
+    <tr class="row table-row">
+      <td class="col s2">
+        <span>
+          <%= link expense.name, to: Routes.expense_path(@conn, :show, expense), class: "table-link" %>
+        </span>
+      </td>
+      <td class="table-header col s2"><%= expense.date %></td>
+      <td class="table-header col s2"><%= expense.value %></td>
+      <td class="col s2">
+        <span>
+          <%= link expense.account.name, to: Routes.account_path(@conn, :show, expense.account), class: "table-link" %>
+        </span>
+      </td>
+      <td class="col s1">
+        <span>
+          <%= link expense.place.name, to: Routes.place_path(@conn, :show, expense.place), class: "table-link" %>
+        </span>
+      </td>
+      <td class="col s1">
+        <span>
+          <%= link expense.bill.name, to: Routes.bill_path(@conn, :show, expense.bill), class: "table-link" %>
+        </span>
+      </td>
+      <td class="col s1">
+        <span>
+          <%= link expense.category.name, to: Routes.category_path(@conn, :show, expense.category), class: "table-link" %>
+        </span>
+      </td>
+
+      <td class="col s1">
+        <span>
+          <%= link to: Routes.expense_path(@conn, :edit, expense), class: "table-link" do %>
+            <i class="material-icons">edit</i>
+          <% end %>
+        </span>
+        <span>
+          <%= link to: Routes.expense_path(@conn, :delete, expense), method: :delete, data: [confirm: "Are you sure?"], class: "table-link" do %>
+            <i class="material-icons">delete</i>
+          <% end %>
+        </span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span>
+  <%= link to: Routes.expense_path(@conn, :new), class: "btn-floating btn-large waves-effect waves-light right" do %>
+    <i class="material-icons">add</i>
+  <% end %>
+</span>

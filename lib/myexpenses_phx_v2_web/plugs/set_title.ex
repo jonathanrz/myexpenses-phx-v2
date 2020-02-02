@@ -30,6 +30,10 @@ defmodule MyexpensesPhxV2Web.Plugs.SetTitle do
       ["receipts", _id, "edit"] -> assign(conn, :title, "Edit Receipt")
       ["receipts", _id] -> assign(conn, :title, "Receipts")
       ["receipts" | _tail] -> assign(conn, :title, "Receipts")
+      ["expenses", "new"] -> assign(conn, :title, "New Expense")
+      ["expenses", _id, "edit"] -> assign(conn, :title, "Edit Expense")
+      ["expenses", _id] -> assign(conn, :title, "Expenses")
+      ["expenses" | _tail] -> assign(conn, :title, "Expenses")
       _ -> assign(conn, :title, "My Expenses")
     end
   end

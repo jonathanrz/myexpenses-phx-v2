@@ -27,6 +27,7 @@ defmodule MyexpensesPhxV2Web.Router do
     resources("/receipts", ReceiptController)
     post "/receipts/:id/confirm", ReceiptController, :confirm
     post "/receipts/:id/unconfirm", ReceiptController, :unconfirm
+    resources("/expenses", ExpenseController)
   end
 
   scope "/auth", MyexpensesPhxV2Web do
