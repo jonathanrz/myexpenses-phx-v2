@@ -5,6 +5,7 @@ defmodule MyexpensesPhxV2.Data do
 
   import Ecto.Query, warn: false
   alias Ecto.Multi
+  alias Ecto.Multi
   alias MyexpensesPhxV2.Repo
 
   alias MyexpensesPhxV2.Data.Account
@@ -651,6 +652,35 @@ defmodule MyexpensesPhxV2.Data do
     |> Repo.preload(:bill)
     |> Repo.preload(:category)
 
+  def create_installment_expense(multi, attrs, user, uuid, installment, date, split_value) do
+    Logger.info("uuid=#{uuid}")
+    Logger.info("installment=#{installment}")
+    changeset = user
+      |> Ecto.build_assoc(:expenses)
+      |> Expense.changeset(Map.merge(attrs, %{
+        "installmentUUID" => uuid,
+        "installmentNumber" => installment,
+        "value" => split_value,
+        "date" => date
+      }))
+      
+    %{ "installmentNumber" => installmentNumber } = attrs
+    {installmentCount, _} = Integer.parse(installmentNumber)
+    if(installment < installmentCount) do
+      create_installment_expense(
+        Multi.insert(multi, String.to_atom("expense#{installment}"), changeset),
+        attrs,
+        user,
+        uuid,
+        installment + 1,
+        Date.add(date, Date.days_in_month(date)),
+        split_value
+      )
+    else
+      Multi.insert(multi, String.to_atom("expense#{installment}"), changeset)
+    end
+  end
+
   @doc """
   Creates a expense.
 
@@ -664,10 +694,29 @@ defmodule MyexpensesPhxV2.Data do
 
   """
   def create_expense(attrs \\ %{}, user) do
-    user
-    |> Ecto.build_assoc(:expenses)
-    |> Expense.changeset(attrs)
-    |> Repo.insert()
+    %{ "installmentNumber" => installmentNumber, "date" => date, "value" => value } = attrs
+    if(installmentNumber) do
+      {installmentCount, _} = Integer.parse(installmentNumber)
+      {_, parsedDate} = Date.from_iso8601(date)
+      {parsedValue, _} = Integer.parse(value)
+    
+      {result, expenses} = Repo.transaction(create_installment_expense(
+        Multi.new(),
+        attrs,
+        user,
+        Ecto.UUID.generate(),
+        1,
+        parsedDate,
+        div(parsedValue, installmentCount)
+      ))
+
+      {result, expenses.expense1}
+    else
+      user
+      |> Ecto.build_assoc(:expenses)
+      |> Expense.changeset(attrs)
+      |> Repo.insert()
+    end
   end
 
   @doc """

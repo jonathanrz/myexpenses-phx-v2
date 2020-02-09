@@ -53,6 +53,14 @@
     <%= error_tag f, :category_id %>
   </div>
 
+  <%= unless @changeset.data.id do %>
+    <div class="input-field mb-2">
+      <%= label f, :installmentNumber %>
+      <%= number_input f, :installmentNumber %>
+      <%= error_tag f, :installmentNumber %>
+    </div>
+  <% end %>
+
   <div class="right">
     <%= button "Cancel", to: Routes.expense_path(@conn, :index), method: "get", class: "waves-effect waves-teal btn-flat" %>
     <%= submit "Save", class: "btn waves-effect waves-light" %>

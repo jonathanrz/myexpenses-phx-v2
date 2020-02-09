@@ -21,7 +21,7 @@ defmodule MyexpensesPhxV2.Data.Expense do
   @doc false
   def changeset(expense, attrs) do
     expense
-    |> cast(attrs, [:name, :date, :value, :account_id, :credit_card_id, :place_id, :bill_id, :category_id])
+    |> cast(attrs, [:name, :date, :value, :account_id, :credit_card_id, :place_id, :bill_id, :category_id, :installmentUUID, :installmentNumber])
     |> validate_required([:name, :date, :value])
   end
 end
