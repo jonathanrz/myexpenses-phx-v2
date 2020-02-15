@@ -629,6 +629,12 @@ defmodule MyexpensesPhxV2.Data do
     |> Repo.preload(:place)
     |> Repo.preload(:bill)
     |> Repo.preload(:category)
+    |> Enum.map(fn expense -> Map.put(expense, :installmentCount, load_installment_count(expense.installmentUUID)) end)
+  end
+
+  defp load_installment_count(nil), do: 0
+  defp load_installment_count(installmentUUID) do
+    Repo.one(from e in "expenses", select: count(e.installmentUUID == ^installmentUUID))
   end
 
   @doc """

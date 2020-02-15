@@ -17,7 +17,7 @@
     <tr class="row table-row">
       <td class="col s2">
         <span>
-          <%= link expense.name, to: Routes.expense_path(@conn, :show, expense), class: "table-link" %>
+          <%= link expense_name(expense.name, expense.installmentNumber, expense.installmentCount), to: Routes.expense_path(@conn, :show, expense), class: "table-link" %>
         </span>
       </td>
       <td class="table-header col s2"><%= expense.date %></td>

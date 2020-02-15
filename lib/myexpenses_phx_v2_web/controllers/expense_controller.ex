@@ -4,8 +4,6 @@ defmodule MyexpensesPhxV2Web.ExpenseController do
   alias MyexpensesPhxV2.Data
   alias MyexpensesPhxV2.Data.Expense
 
-  require Logger
-
   plug(MyexpensesPhxV2Web.Plugs.RequireAuth)
   plug(:check_expense_owner when action not in [:index, :new, :create])
 
@@ -35,7 +33,6 @@ defmodule MyexpensesPhxV2Web.ExpenseController do
 
   def create(conn, %{"expense" => expense_params}) do
     result = Data.create_expense(expense_params, conn.assigns.user)
-    Logger.info(inspect(result))
     case result do
       {:ok, expense} ->
         conn
