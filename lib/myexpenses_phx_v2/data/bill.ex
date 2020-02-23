@@ -8,7 +8,7 @@ defmodule MyexpensesPhxV2.Data.Bill do
     field :init_date, :date
     field :name, :string
     field :value, :integer
-    belongs_to(:user, MyexpensesPhxV2.Data.User)
+    belongs_to(:user, MyexpensesPhxV2.User)
 
     timestamps()
   end

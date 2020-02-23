@@ -7,7 +7,7 @@ defmodule MyexpensesPhxV2.Data.Account do
   schema "accounts" do
     field :balance, :integer
     field :name, :string
-    belongs_to(:user, MyexpensesPhxV2.Data.User)
+    belongs_to(:user, MyexpensesPhxV2.User)
     has_many(:credit_cards, MyexpensesPhxV2.Data.CreditCard)
 
     timestamps()

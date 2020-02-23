@@ -1,0 +1,68 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <div class="input-field mb-2">
+    <%= label f, :name %>
+    <%= text_input f, :name %>
+    <%= error_tag f, :name %>
+  </div>
+
+  <div class="input-field mb-2">
+    <%= label f, :date %>
+    <%= text_input f, :date, class: "datepicker" %>
+    <%= error_tag f, :date %>
+  </div>
+
+  <div class="input-field mb-2">
+    <%= label f, :value %>
+    <%= number_input f, :value %>
+    <%= error_tag f, :value %>
+  </div>
+
+  <div class="input-field mb-2">
+    <%= select f, :account_id, @accounts %>
+    <%= label f, :account_id %>
+    <%= error_tag f, :account_id %>
+  </div>
+
+  <div class="input-field mb-2">
+    <%= select f, :credit_card_id, @credit_cards %>
+    <%= label f, :credit_card_id %>
+    <%= error_tag f, :credit_card_id %>
+  </div>
+
+  <div class="input-field mb-2">
+    <%= select f, :place_id, @places %>
+    <%= label f, :place_id %>
+    <%= error_tag f, :place_id %>
+  </div>
+
+  <div class="input-field mb-2">
+    <%= select f, :bill_id, @bills %>
+    <%= label f, :bill_id %>
+    <%= error_tag f, :bill_id %>
+  </div>
+
+  <div class="input-field mb-2">
+    <%= select f, :category_id, @categories %>
+    <%= label f, :category_id %>
+    <%= error_tag f, :category_id %>
+  </div>
+
+  <%= unless @changeset.data.id do %>
+    <div class="input-field mb-2">
+      <%= label f, :installmentNumber %>
+      <%= number_input f, :installmentNumber %>
+      <%= error_tag f, :installmentNumber %>
+    </div>
+  <% end %>
+
+  <div class="right">
+    <%= button "Cancel", to: Routes.expense_path(@conn, :index), method: "get", class: "waves-effect waves-teal btn-flat" %>
+    <%= submit "Save", class: "btn waves-effect waves-light" %>
+  </div>
+<% end %>
