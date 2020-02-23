@@ -15,6 +15,18 @@
     <%= @expense.value %>
   </li>
 
+  <%= if @expense.installmentUUID do %>
+    <li>
+      <strong>Installment:</strong>
+      <%= @expense.installmentNumber %>
+    </li>
+
+    <li>
+      <strong>Installment Count:</strong>
+      <%= @expense.installmentCount %>
+    </li>
+  <% end %>
+
   <li>
     <strong>Account:</strong>
     <%= @expense.account.name %>
