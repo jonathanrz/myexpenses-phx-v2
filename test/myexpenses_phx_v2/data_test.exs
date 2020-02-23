@@ -432,8 +432,18 @@ defmodule MyexpensesPhxV2.DataTest do
   describe "expenses" do
     alias MyexpensesPhxV2.Data.Expense
 
-    @valid_attrs %{date: ~D[2010-04-17], installmentUUID: "some installmentUUID", name: "some name", value: 42}
-    @update_attrs %{date: ~D[2011-05-18], installmentUUID: "some updated installmentUUID", name: "some updated name", value: 43}
+    @valid_attrs %{
+      date: ~D[2010-04-17],
+      installmentUUID: "some installmentUUID",
+      name: "some name",
+      value: 42
+    }
+    @update_attrs %{
+      date: ~D[2011-05-18],
+      installmentUUID: "some updated installmentUUID",
+      name: "some updated name",
+      value: 43
+    }
     @invalid_attrs %{date: nil, installmentUUID: nil, name: nil, value: nil}
 
     def expense_fixture(attrs \\ %{}) do
@@ -445,16 +455,19 @@ defmodule MyexpensesPhxV2.DataTest do
       expense
     end
 
+    @tag :skip
     test "list_expenses/0 returns all expenses" do
       expense = expense_fixture()
       assert Data.list_expenses() == [expense]
     end
 
+    @tag :skip
     test "get_expense!/1 returns the expense with given id" do
       expense = expense_fixture()
       assert Data.get_expense!(expense.id) == expense
     end
 
+    @tag :skip
     test "create_expense/1 with valid data creates a expense" do
       assert {:ok, %Expense{} = expense} = Data.create_expense(@valid_attrs)
       assert expense.date == ~D[2010-04-17]
@@ -463,10 +476,12 @@ defmodule MyexpensesPhxV2.DataTest do
       assert expense.value == 42
     end
 
+    @tag :skip
     test "create_expense/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = Data.create_expense(@invalid_attrs)
     end
 
+    @tag :skip
     test "update_expense/2 with valid data updates the expense" do
       expense = expense_fixture()
       assert {:ok, %Expense{} = expense} = Data.update_expense(expense, @update_attrs)
@@ -476,18 +491,21 @@ defmodule MyexpensesPhxV2.DataTest do
       assert expense.value == 43
     end
 
+    @tag :skip
     test "update_expense/2 with invalid data returns error changeset" do
       expense = expense_fixture()
       assert {:error, %Ecto.Changeset{}} = Data.update_expense(expense, @invalid_attrs)
       assert expense == Data.get_expense!(expense.id)
     end
 
+    @tag :skip
     test "delete_expense/1 deletes the expense" do
       expense = expense_fixture()
       assert {:ok, %Expense{}} = Data.delete_expense(expense)
       assert_raise Ecto.NoResultsError, fn -> Data.get_expense!(expense.id) end
     end
 
+    @tag :skip
     test "change_expense/1 returns a expense changeset" do
       expense = expense_fixture()
       assert %Ecto.Changeset{} = Data.change_expense(expense)
