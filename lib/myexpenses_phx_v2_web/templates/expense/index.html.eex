@@ -4,7 +4,8 @@
       <th class="table-header col s2">Name</th>
       <th class="table-header col s2">Date</th>
       <th class="table-header col s2">Value</th>
-      <th class="table-header col s2">Paid with</th>
+      <th class="table-header col s1">Action</th>
+      <th class="table-header col s1">Paid with</th>
       <th class="table-header col s1">Place</th>
       <th class="table-header col s1">Bill</th>
       <th class="table-header col s1">Category</th>
@@ -22,7 +23,12 @@
       </td>
       <td class="table-header col s2"><%= expense.date %></td>
       <td class="table-header col s2"><%= expense.value %></td>
-      <td class="col s2">
+      <td class="col s1">
+        <%= link to: Routes.expense_path(@conn, if expense.confirmed do :unconfirm else :confirm end, expense), method: :post, class: (if expense.confirmed do "btn red" else "btn green" end) do %>
+          <%= if expense.confirmed do "Unconfirm" else "Confirm" end %>
+        <% end %>
+      </td>
+      <td class="col s1">
         <span>
           <%= link expense.account.name, to: Routes.account_path(@conn, :show, expense.account), class: "table-link" %>
         </span>

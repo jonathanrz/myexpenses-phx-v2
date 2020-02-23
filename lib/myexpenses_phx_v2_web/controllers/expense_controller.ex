@@ -19,6 +19,7 @@ defmodule MyexpensesPhxV2Web.ExpenseController do
     places = load_places(conn)
     bills = load_bills(conn)
     categories = load_categories(conn)
+
     render(
       conn,
       "new.html",
@@ -33,6 +34,7 @@ defmodule MyexpensesPhxV2Web.ExpenseController do
 
   def create(conn, %{"expense" => expense_params}) do
     result = Data.create_expense(expense_params, conn.assigns.user)
+
     case result do
       {:ok, expense} ->
         conn
@@ -57,6 +59,7 @@ defmodule MyexpensesPhxV2Web.ExpenseController do
     bills = load_bills(conn)
     categories = load_categories(conn)
     changeset = Data.change_expense(expense)
+
     render(
       conn,
       "edit.html",
@@ -90,6 +93,26 @@ defmodule MyexpensesPhxV2Web.ExpenseController do
 
     conn
     |> put_flash(:info, "Expense deleted successfully.")
+    |> redirect(to: Routes.expense_path(conn, :index))
+  end
+
+  def confirm(conn, %{"id" => id}) do
+    expense = Data.get_expense!(id)
+
+    {:ok, _expense} = Data.confirm_expense(expense)
+
+    conn
+    |> put_flash(:info, "Expense confirmed successfully.")
+    |> redirect(to: Routes.expense_path(conn, :index))
+  end
+
+  def unconfirm(conn, %{"id" => id}) do
+    expense = Data.get_expense!(id)
+
+    {:ok, _expense} = Data.unconfirm_expense(expense)
+
+    conn
+    |> put_flash(:info, "Expense unconfirmed successfully.")
     |> redirect(to: Routes.expense_path(conn, :index))
   end
 

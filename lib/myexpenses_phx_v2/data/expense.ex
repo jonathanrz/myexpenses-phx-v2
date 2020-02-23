@@ -3,6 +3,7 @@ defmodule MyexpensesPhxV2.Data.Expense do
   import Ecto.Changeset
 
   schema "expenses" do
+    field :confirmed, :boolean, default: false
     field :date, :date
     field :installmentUUID, :string
     field :installmentNumber, :integer
@@ -13,7 +14,7 @@ defmodule MyexpensesPhxV2.Data.Expense do
     belongs_to(:place, MyexpensesPhxV2.Data.Place)
     belongs_to(:bill, MyexpensesPhxV2.Data.Bill)
     belongs_to(:category, MyexpensesPhxV2.Data.Category)
-    belongs_to(:user, MyexpensesPhxV2.Data.User)
+    belongs_to(:user, MyexpensesPhxV2.User)
 
     timestamps()
   end
@@ -21,7 +22,19 @@ defmodule MyexpensesPhxV2.Data.Expense do
   @doc false
   def changeset(expense, attrs) do
     expense
-    |> cast(attrs, [:name, :date, :value, :account_id, :credit_card_id, :place_id, :bill_id, :category_id, :installmentUUID, :installmentNumber])
+    |> cast(attrs, [
+      :confirmed,
+      :name,
+      :date,
+      :value,
+      :account_id,
+      :credit_card_id,
+      :place_id,
+      :bill_id,
+      :category_id,
+      :installmentUUID,
+      :installmentNumber
+    ])
     |> validate_required([:name, :date, :value])
   end
 end

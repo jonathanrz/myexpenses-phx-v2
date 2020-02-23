@@ -795,4 +795,24 @@ defmodule MyexpensesPhxV2.Data do
   def change_expense(%Expense{} = expense) do
     Expense.changeset(expense, %{})
   end
+
+  def confirm_expense(expense) do
+    Multi.new()
+    |> Multi.update(
+      :account,
+      Account.changeset(expense.account, %{balance: expense.account.balance - expense.value})
+    )
+    |> Multi.update(:expense, Expense.changeset(expense, %{confirmed: true}))
+    |> Repo.transaction()
+  end
+
+  def unconfirm_expense(expense) do
+    Multi.new()
+    |> Multi.update(
+      :account,
+      Account.changeset(expense.account, %{balance: expense.account.balance + expense.value})
+    )
+    |> Multi.update(:expense, Expense.changeset(expense, %{confirmed: false}))
+    |> Repo.transaction()
+  end
 end
