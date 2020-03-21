@@ -45,7 +45,8 @@ defmodule MyexpensesPhxV2.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:ueberauth, "~> 0.5"},
       {:ueberauth_google, "~> 0.7"},
-      {:number, "~> 1.0.0"}
+      {:number, "~> 1.0.0"},
+      {:react_phoenix, "~> 1.2"}
     ]
   end
 
