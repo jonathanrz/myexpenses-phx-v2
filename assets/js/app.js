@@ -23,3 +23,9 @@ document.addEventListener("DOMContentLoaded", function() {
     format: "yyyy-mm-dd"
   });
 });
+
+import "react-phoenix";
+import Test from "./components/test";
+window.Components = {
+  Test
+};

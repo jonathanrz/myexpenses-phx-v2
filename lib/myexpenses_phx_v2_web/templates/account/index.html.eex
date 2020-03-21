@@ -1,3 +1,5 @@
+<%= react_component("Components.Test") %>
+
 <table class="striped mt-3">
   <thead>
     <tr class="row">
