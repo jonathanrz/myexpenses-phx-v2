@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Test() {
-  return <div>Test2</div>;
+  const [counter, setCounter] = useState(0);
+  return (
+    <div>
+      <button onClick={() => setCounter(counter + 1)}>+</button>
+      {counter}
+    </div>
+  );
 }
 
 export default Test;
