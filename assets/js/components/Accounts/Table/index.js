@@ -6,10 +6,13 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import EditIcon from "@material-ui/icons/Edit";
+import Link from "@material-ui/core/Link";
 
 import ThemeProvider from "../../shared/ThemeProvider";
 
 function AccountsTable({ accounts }) {
+  console.log({ accounts });
   return (
     <ThemeProvider>
       <TableContainer component={Paper}>
@@ -18,15 +21,21 @@ function AccountsTable({ accounts }) {
             <TableRow>
               <TableCell>Name</TableCell>
               <TableCell align="right">Balance</TableCell>
+              <TableCell />
             </TableRow>
           </TableHead>
           <TableBody>
             {accounts.map(account => (
-              <TableRow key={account.name}>
+              <TableRow key={account.id}>
                 <TableCell component="th" scope="row">
                   {account.name}
                 </TableCell>
                 <TableCell align="right">${account.balance}</TableCell>
+                <TableCell align="center">
+                  <Link href={`accounts/${account.id}/edit`}>
+                    <EditIcon />
+                  </Link>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
