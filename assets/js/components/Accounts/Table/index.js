@@ -31,7 +31,7 @@ function AccountsTable({ accounts }) {
             {accounts.map(account => (
               <TableRow key={account.id}>
                 <TableCell component="th" scope="row">
-                  {account.name}
+                  <Link href={`accounts/${account.id}`}>{account.name}</Link>
                 </TableCell>
                 <TableCell align="right">${account.balance}</TableCell>
                 <TableCell align="center">
