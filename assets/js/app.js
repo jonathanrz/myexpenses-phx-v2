@@ -26,10 +26,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
 import "react-phoenix";
 import AccountsTable from "./components/Accounts/Table";
+import CategoriesTable from "./components/Categories/Table";
 import CreditCardsTable from "./components/CreditCards/Table";
 import PlacesTable from "./components/Places/Table";
 window.Components = {
   AccountsTable,
+  CategoriesTable,
   CreditCardsTable,
   PlacesTable
 };
