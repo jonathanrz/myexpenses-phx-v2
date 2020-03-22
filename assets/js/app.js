@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 import "react-phoenix";
-import Test from "./components/test";
+import AccountsTable from "./components/Accounts/Table";
 window.Components = {
-  Test
+  AccountsTable
 };
