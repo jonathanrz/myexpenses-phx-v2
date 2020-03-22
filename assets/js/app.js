@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 import "react-phoenix";
 import AccountsTable from "./components/Accounts/Table";
+import CreditCardsTable from "./components/CreditCards/Table";
 window.Components = {
-  AccountsTable
+  AccountsTable,
+  CreditCardsTable
 };

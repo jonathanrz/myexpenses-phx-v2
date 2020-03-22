@@ -16,9 +16,8 @@ import Link from "@material-ui/core/Link";
 
 import ThemeProvider from "../../shared/ThemeProvider";
 import getCSRFToken from "../../../helpers/getCSRFToken";
-import Currency from "../../../helpers/currency";
 
-const PATH = "accounts";
+const PATH = "credit_cards";
 
 const csrfToken = getCSRFToken();
 
@@ -27,13 +26,13 @@ const AddButtonContainer = styled(Box)({
   "justify-content": "flex-end"
 });
 
-function AccountsTable({ data }) {
+function CreditCardsTable({ data }) {
   return (
     <ThemeProvider>
       <AddButtonContainer mb={1}>
         <Link href={`${PATH}/new`}>
           <Button variant="contained" color="secondary" startIcon={<AddIcon />}>
-            New Account
+            New Credit Card
           </Button>
         </Link>
       </AddButtonContainer>
@@ -42,7 +41,7 @@ function AccountsTable({ data }) {
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
-              <TableCell>Balance</TableCell>
+              <TableCell>Account</TableCell>
               <TableCell />
             </TableRow>
           </TableHead>
@@ -52,7 +51,11 @@ function AccountsTable({ data }) {
                 <TableCell component="th" scope="row">
                   <Link href={`${PATH}/${d.id}`}>{d.name}</Link>
                 </TableCell>
-                <TableCell>{Currency.format(d.balance)}</TableCell>
+                <TableCell component="th" scope="row">
+                  <Link href={`accounts/${d.account.id}`}>
+                    {d.account.name}
+                  </Link>
+                </TableCell>
                 <TableCell align="right">
                   <Link href={`${PATH}/${d.id}/edit`}>
                     <EditIcon />
@@ -77,4 +80,4 @@ function AccountsTable({ data }) {
   );
 }
 
-export default AccountsTable;
+export default CreditCardsTable;
