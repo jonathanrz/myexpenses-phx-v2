@@ -15,23 +15,25 @@ import "phoenix_html";
 
 import M from "materialize-css";
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   M.AutoInit();
 
   const elems = document.querySelectorAll(".datepicker");
   M.Datepicker.init(elems, {
-    format: "yyyy-mm-dd"
+    format: "yyyy-mm-dd",
   });
 });
 
 import "react-phoenix";
 import AccountsTable from "./components/Accounts/Table";
+import BillsTable from "./components/Bills/Table";
 import CategoriesTable from "./components/Categories/Table";
 import CreditCardsTable from "./components/CreditCards/Table";
 import PlacesTable from "./components/Places/Table";
 window.Components = {
   AccountsTable,
+  BillsTable,
   CategoriesTable,
   CreditCardsTable,
-  PlacesTable
+  PlacesTable,
 };

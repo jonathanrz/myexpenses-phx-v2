@@ -2,6 +2,8 @@ defmodule MyexpensesPhxV2.Data.Bill do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {Jason.Encoder, only: [:id, :name, :init_date, :end_date, :value, :due_day]}
+
   schema "bills" do
     field :due_day, :integer
     field :end_date, :date
