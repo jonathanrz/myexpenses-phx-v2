@@ -25,15 +25,15 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 import "react-phoenix";
-import AccountsTable from "./components/Accounts/Table";
-import BillsTable from "./components/Bills/Table";
-import CategoriesTable from "./components/Categories/Table";
-import CreditCardsTable from "./components/CreditCards/Table";
-import PlacesTable from "./components/Places/Table";
+import Accounts from "./components/Accounts";
+import Bills from "./components/Bills";
+import Categories from "./components/Categories";
+import CreditCards from "./components/CreditCards";
+import Places from "./components/Places";
 window.Components = {
-  AccountsTable,
-  BillsTable,
-  CategoriesTable,
-  CreditCardsTable,
-  PlacesTable,
+  Accounts,
+  Bills,
+  Categories,
+  CreditCards,
+  Places,
 };

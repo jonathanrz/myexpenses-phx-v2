@@ -1,1 +1,1 @@
-<%= react_component("Components.PlacesTable", %{data: @places }) %>
+<%= react_component("Components.Places.Table", %{data: @places }) %>
