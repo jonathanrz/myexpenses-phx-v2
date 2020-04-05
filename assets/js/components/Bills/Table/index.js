@@ -2,8 +2,8 @@ import React from "react";
 import TableCell from "@material-ui/core/TableCell";
 import Link from "@material-ui/core/Link";
 import moment from "moment";
-import Currency from "../../../helpers/currency";
 
+import Currency from "../../../helpers/currency";
 import ModelTable from "../../shared/ModelTable";
 
 const PATH = "bills";
@@ -13,7 +13,7 @@ function BillsTable({ data }) {
     <ModelTable
       data={data}
       path={PATH}
-      label="Bills"
+      label="Bill"
       renderHeaders={() => (
         <React.Fragment>
           <TableCell>Name</TableCell>

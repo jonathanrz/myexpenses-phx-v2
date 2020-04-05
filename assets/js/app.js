@@ -30,10 +30,12 @@ import Bills from "./components/Bills";
 import Categories from "./components/Categories";
 import CreditCards from "./components/CreditCards";
 import Places from "./components/Places";
+import Receipts from "./components/Receipts";
 window.Components = {
   Accounts,
   Bills,
   Categories,
   CreditCards,
   Places,
+  Receipts,
 };
