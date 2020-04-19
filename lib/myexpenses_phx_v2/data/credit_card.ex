@@ -2,6 +2,8 @@ defmodule MyexpensesPhxV2.Data.CreditCard do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {Jason.Encoder, only: [:id, :name, :account]}
+
   schema "credit_cards" do
     field :name, :string
     belongs_to(:account, MyexpensesPhxV2.Data.Account)

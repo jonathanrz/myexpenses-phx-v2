@@ -629,11 +629,7 @@ defmodule MyexpensesPhxV2.Data do
   """
   def list_expenses(user) do
     Repo.all(Ecto.assoc(user, :expenses))
-    |> Repo.preload(:account)
-    |> Repo.preload(:credit_card)
-    |> Repo.preload(:place)
-    |> Repo.preload(:bill)
-    |> Repo.preload(:category)
+    |> Repo.preload([:account, :place, :bill, :category, :user, credit_card: [:account]])
     |> Enum.map(fn expense ->
       Map.put(expense, :installmentCount, load_installment_count(expense.installmentUUID))
     end)

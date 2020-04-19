@@ -42,6 +42,8 @@ defmodule MyexpensesPhxV2Web do
       import MyexpensesPhxV2Web.ErrorHelpers
       import MyexpensesPhxV2Web.Gettext
       alias MyexpensesPhxV2Web.Router.Helpers, as: Routes
+
+      import ReactPhoenix.ClientSide
     end
   end
 

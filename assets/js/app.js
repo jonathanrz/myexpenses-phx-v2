@@ -15,11 +15,29 @@ import "phoenix_html";
 
 import M from "materialize-css";
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   M.AutoInit();
 
   const elems = document.querySelectorAll(".datepicker");
   M.Datepicker.init(elems, {
-    format: "yyyy-mm-dd"
+    format: "yyyy-mm-dd",
   });
 });
+
+import "react-phoenix";
+import Accounts from "./components/Accounts";
+import Bills from "./components/Bills";
+import Categories from "./components/Categories";
+import CreditCards from "./components/CreditCards";
+import Expenses from "./components/Expenses";
+import Places from "./components/Places";
+import Receipts from "./components/Receipts";
+window.Components = {
+  Accounts,
+  Bills,
+  Categories,
+  CreditCards,
+  Expenses,
+  Places,
+  Receipts,
+};
