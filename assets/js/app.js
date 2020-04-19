@@ -29,6 +29,7 @@ import Accounts from "./components/Accounts";
 import Bills from "./components/Bills";
 import Categories from "./components/Categories";
 import CreditCards from "./components/CreditCards";
+import Expenses from "./components/Expenses";
 import Places from "./components/Places";
 import Receipts from "./components/Receipts";
 window.Components = {
@@ -36,6 +37,7 @@ window.Components = {
   Bills,
   Categories,
   CreditCards,
+  Expenses,
   Places,
   Receipts,
 };

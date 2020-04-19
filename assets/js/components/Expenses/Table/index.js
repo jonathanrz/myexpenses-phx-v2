@@ -13,7 +13,7 @@ import ModelTable from "../../shared/ModelTable";
 
 const csrfToken = getCSRFToken();
 
-const PATH = "receipts";
+const PATH = "expenses";
 
 const ConfirmButton = styled(Button)`
   background-color: ${branch(
@@ -32,31 +32,40 @@ const ConfirmButton = styled(Button)`
   }
 `;
 
-function ReceiptsTable({ data }) {
+function ExpensesTable({ data }) {
   const theme = useTheme();
 
   function confirmLink(d) {
     return `/${PATH}/${d.id}/${d.confirmed ? "unconfirm" : "confirm"}`;
   }
 
+  function renderName(d) {
+    if (!d.installmentNumber || !d.installmentCount) return d.name;
+
+    return `${d.name} ${d.installmentNumber}/${d.installmentCount}`;
+  }
+
   return (
     <ModelTable
       data={data}
       path={PATH}
-      label="Receipt"
+      label="Expense"
       renderHeaders={() => (
         <React.Fragment>
           <TableCell>Name</TableCell>
           <TableCell>Date</TableCell>
           <TableCell>Value</TableCell>
           <TableCell>Action</TableCell>
-          <TableCell>Account</TableCell>
+          <TableCell>Paid with</TableCell>
+          <TableCell>Place</TableCell>
+          <TableCell>Bill</TableCell>
+          <TableCell>Category</TableCell>
         </React.Fragment>
       )}
       renderRowData={(d) => (
         <React.Fragment>
           <TableCell component="th" scope="row">
-            <Link href={`${PATH}/${d.id}`}>{d.name}</Link>
+            <Link href={`${PATH}/${d.id}`}>{renderName(d)}</Link>
           </TableCell>
           <TableCell>{moment(d.date).format("DD/MM/YYYY")}</TableCell>
           <TableCell>{Currency.format(d.value)}</TableCell>
@@ -78,7 +87,22 @@ function ReceiptsTable({ data }) {
             </ConfirmButton>
           </TableCell>
           <TableCell>
-            <Link href={`accounts/${d.account.id}`}>{d.account.name}</Link>
+            {d.credit_card ? (
+              <Link href={`credit_cards/${d.credit_card.id}`}>
+                {d.credit_card.name}
+              </Link>
+            ) : (
+              <Link href={`accounts/${d.account.id}`}>{d.account.name}</Link>
+            )}
+          </TableCell>
+          <TableCell>
+            <Link href={`places/${d.place.id}`}>{d.place.name}</Link>
+          </TableCell>
+          <TableCell>
+            <Link href={`bills/${d.bill.id}`}>{d.bill.name}</Link>
+          </TableCell>
+          <TableCell>
+            <Link href={`categories/${d.category.id}`}>{d.category.name}</Link>
           </TableCell>
         </React.Fragment>
       )}
@@ -86,4 +110,4 @@ function ReceiptsTable({ data }) {
   );
 }
 
-export default ReceiptsTable;
+export default ExpensesTable;

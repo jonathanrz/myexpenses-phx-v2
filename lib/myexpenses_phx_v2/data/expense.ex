@@ -2,6 +2,23 @@ defmodule MyexpensesPhxV2.Data.Expense do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {Jason.Encoder,
+           only: [
+             :id,
+             :name,
+             :date,
+             :confirmed,
+             :value,
+             :account,
+             :credit_card,
+             :place,
+             :bill,
+             :category,
+             :user,
+             :installmentNumber,
+             :installmentCount
+           ]}
+
   schema "expenses" do
     field :confirmed, :boolean, default: false
     field :date, :date
