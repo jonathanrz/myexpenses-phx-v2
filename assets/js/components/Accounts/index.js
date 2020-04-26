@@ -1,3 +1,4 @@
+import Form from "./Form";
 import Table from "./Table";
 
-export default { Table };
+export default { Form, Table };
