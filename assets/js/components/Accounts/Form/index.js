@@ -2,19 +2,13 @@ import React from "react";
 import { useFormik } from "formik";
 
 import getCSRFToken from "../../../helpers/getCSRFToken";
+import FormikTextField from "../../shared/form/FormikTextField";
 
 const validate = (values) => {
   const errors = {};
 
-  if (!values.name) {
-    errors.name = "Required";
-  }
-
-  if (!values.balance) {
-    errors.balance = "Required";
-  }
-
-  console.log({ errors });
+  if (!values.name) errors.name = "Required";
+  if (!values.balance) errors.balance = "Required";
 
   return errors;
 };
@@ -46,32 +40,13 @@ function AccountForm() {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <div className="input-field mb-2">
-        <label htmlFor="name">Name</label>
-        <input
-          id="name"
-          name="name"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.name}
-        />
-        {formik.touched.name && formik.errors.name ? (
-          <div>{formik.errors.name}</div>
-        ) : null}
-      </div>
-      <div className="input-field mb-2">
-        <label htmlFor="balance">Balance</label>
-        <input
-          id="balance"
-          name="balance"
-          type="number"
-          onChange={formik.handleChange}
-          value={formik.values.balance}
-        />
-        {formik.touched.balance && formik.errors.balance ? (
-          <div>{formik.errors.balance}</div>
-        ) : null}
-      </div>
+      <FormikTextField name="name" label="Name" formik={formik} />
+      <FormikTextField
+        name="balance"
+        label="Balance"
+        type="number"
+        formik={formik}
+      />
       <div className="right">
         <button
           className="waves-effect waves-teal btn-flat"
