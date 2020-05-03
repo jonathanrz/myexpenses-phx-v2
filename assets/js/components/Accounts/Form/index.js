@@ -3,12 +3,29 @@ import { useFormik } from "formik";
 
 import getCSRFToken from "../../../helpers/getCSRFToken";
 
+const validate = (values) => {
+  const errors = {};
+
+  if (!values.name) {
+    errors.name = "Required";
+  }
+
+  if (!values.balance) {
+    errors.balance = "Required";
+  }
+
+  console.log({ errors });
+
+  return errors;
+};
+
 function AccountForm() {
   const formik = useFormik({
     initialValues: {
       name: "",
       balance: 0,
     },
+    validate,
     onSubmit: (values) => {
       const body = new FormData();
 
@@ -27,8 +44,6 @@ function AccountForm() {
     },
   });
 
-  console.log({ formik });
-
   return (
     <form onSubmit={formik.handleSubmit}>
       <div className="input-field mb-2">
@@ -40,6 +55,9 @@ function AccountForm() {
           onChange={formik.handleChange}
           value={formik.values.name}
         />
+        {formik.touched.name && formik.errors.name ? (
+          <div>{formik.errors.name}</div>
+        ) : null}
       </div>
       <div className="input-field mb-2">
         <label htmlFor="balance">Balance</label>
@@ -50,6 +68,9 @@ function AccountForm() {
           onChange={formik.handleChange}
           value={formik.values.balance}
         />
+        {formik.touched.balance && formik.errors.balance ? (
+          <div>{formik.errors.balance}</div>
+        ) : null}
       </div>
       <div className="right">
         <button
