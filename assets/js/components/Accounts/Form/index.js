@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 
 import getCSRFToken from "../../../helpers/getCSRFToken";
 import FormikTextField from "../../shared/form/FormikTextField";
+import FormikCurrencyField from "../../shared/form/FormikCurrencyField";
 
 const validate = (values) => {
   const errors = {};
@@ -41,12 +42,7 @@ function AccountForm() {
   return (
     <form onSubmit={formik.handleSubmit}>
       <FormikTextField name="name" label="Name" formik={formik} />
-      <FormikTextField
-        name="balance"
-        label="Balance"
-        type="number"
-        formik={formik}
-      />
+      <FormikCurrencyField name="balance" label="Balance" formik={formik} />
       <div className="right">
         <button
           className="waves-effect waves-teal btn-flat"
