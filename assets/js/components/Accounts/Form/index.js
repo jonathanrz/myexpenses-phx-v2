@@ -14,11 +14,11 @@ const validate = (values) => {
   return errors;
 };
 
-function AccountForm() {
+function AccountForm({ data = {} }) {
   const formik = useFormik({
     initialValues: {
-      name: "",
-      balance: 0,
+      name: data.name || "",
+      balance: data.balance || 0,
     },
     validate,
     onSubmit: (values) => {
@@ -28,11 +28,16 @@ function AccountForm() {
         body.append(`account[${key}]`, values[key]);
       }
       body.append("_csrf_token", getCSRFToken());
-      fetch("/accounts", {
-        method: "POST",
+
+      const url = `/accounts${data.id && "/" + data.id}`;
+      const method = data.id ? "PUT" : "POST";
+
+      fetch(url, {
+        method,
         body,
+        redirect: "manual",
       }).then((response) => {
-        if (response.redirected) {
+        if (response.redirected || response.type === "opaqueredirect") {
           window.location.href = response.url;
         }
       });
@@ -43,7 +48,7 @@ function AccountForm() {
     <form onSubmit={formik.handleSubmit}>
       <FormikTextField name="name" label="Name" formik={formik} />
       <FormikCurrencyField name="balance" label="Balance" formik={formik} />
-      <div className="right">
+      <div className="mt-3">
         <button
           className="waves-effect waves-teal btn-flat"
           data-csrf={getCSRFToken()}
