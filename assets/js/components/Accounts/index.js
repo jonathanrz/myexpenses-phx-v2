@@ -1,4 +1,5 @@
+import Card from "./Card";
 import Form from "./Form";
 import Table from "./Table";
 
-export default { Form, Table };
+export default { Card, Form, Table };

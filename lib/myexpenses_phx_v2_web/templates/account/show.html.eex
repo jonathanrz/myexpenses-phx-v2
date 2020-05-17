@@ -1,16 +1,1 @@
-<ul class="mt-3">
-  <li>
-    <strong>Name:</strong>
-    <%= @account.name %>
-  </li>
-
-  <li>
-    <strong>Balance:</strong>
-    <%= @account.balance %>
-  </li>
-
-</ul>
-
-<span><%= link "Back", to: Routes.account_path(@conn, :index), class: "waves-effect waves-teal btn-flat" %></span>
-<span><%= link "Edit", to: Routes.account_path(@conn, :edit, @account), class: "btn waves-effect waves-light" %></span>
-
+<%= react_component("Components.Accounts.Card", %{data: @account}) %>
