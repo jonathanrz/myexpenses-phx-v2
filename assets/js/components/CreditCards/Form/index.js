@@ -3,33 +3,32 @@ import { useFormik } from "formik";
 
 import getCSRFToken from "../../../helpers/getCSRFToken";
 import FormikTextField from "../../shared/form/FormikTextField";
-import FormikCurrencyField from "../../shared/form/FormikCurrencyField";
+
+const PATH = "credit_cards";
 
 const validate = (values) => {
   const errors = {};
 
   if (!values.name) errors.name = "Required";
-  if (!values.balance) errors.balance = "Required";
 
   return errors;
 };
 
-function AccountForm({ data = {} }) {
+function CreditCardForm({ data = {} }) {
   const formik = useFormik({
     initialValues: {
       name: data.name || "",
-      balance: data.balance || 0,
     },
     validate,
     onSubmit: (values) => {
       const body = new FormData();
 
       for (var key in values) {
-        body.append(`account[${key}]`, values[key]);
+        body.append(`${PATH}[${key}]`, values[key]);
       }
       body.append("_csrf_token", getCSRFToken());
 
-      const url = `/accounts${data.id && "/" + data.id}`;
+      const url = `/${PATH}${data.id && "/" + data.id}`;
       const method = data.id ? "PUT" : "POST";
 
       fetch(url, {
@@ -47,13 +46,12 @@ function AccountForm({ data = {} }) {
   return (
     <form onSubmit={formik.handleSubmit}>
       <FormikTextField name="name" label="Name" formik={formik} />
-      <FormikCurrencyField name="balance" label="Balance" formik={formik} />
       <div className="mt-3">
         <button
           className="waves-effect waves-teal btn-flat"
           data-csrf={getCSRFToken()}
           data-method="get"
-          data-to="/accounts"
+          data-to={`/${PATH}`}
         >
           Cancel
         </button>
@@ -65,4 +63,4 @@ function AccountForm({ data = {} }) {
   );
 }
 
-export default AccountForm;
+export default CreditCardForm;

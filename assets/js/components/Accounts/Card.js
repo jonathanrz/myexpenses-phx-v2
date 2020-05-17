@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 
-import Currency from "../../../helpers/currency";
+import Currency from "../../helpers/currency";
 
 const PATH = "accounts";
 
@@ -18,14 +18,14 @@ function AccountCard({ data }) {
       <CardActionArea>
         <CardContent>
           <Typography
-            variant="body"
+            variant="body1"
             color="textPrimary"
             component="p"
             gutterBottom
           >
             <b>Name:</b> {data.name}
           </Typography>
-          <Typography variant="body" color="textSecondary" component="p">
+          <Typography variant="body1" color="textSecondary" component="p">
             <b>Balance:</b> {Currency.format(data.balance)}
           </Typography>
         </CardContent>

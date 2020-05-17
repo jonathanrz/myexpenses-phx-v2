@@ -1,9 +1,9 @@
 import React from "react";
 import TableCell from "@material-ui/core/TableCell";
 import Link from "@material-ui/core/Link";
-import Currency from "../../../helpers/currency";
+import Currency from "../../helpers/currency";
 
-import ModelTable from "../../shared/ModelTable";
+import ModelTable from "../shared/ModelTable";
 
 const PATH = "accounts";
 
@@ -19,7 +19,7 @@ function AccountsTable({ data }) {
           <TableCell>Balance</TableCell>
         </React.Fragment>
       )}
-      renderRowData={d => (
+      renderRowData={(d) => (
         <React.Fragment>
           <TableCell component="th" scope="row">
             <Link href={`${PATH}/${d.id}`}>{d.name}</Link>
