@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -11,11 +11,17 @@ import Link from "@material-ui/core/Link";
 import Currency from "../../helpers/currency";
 import getCSRFToken from "../../helpers/getCSRFToken";
 
+import Form from "./Form";
+
 const csrfToken = getCSRFToken();
 
 const PATH = "accounts";
 
 function AccountCard({ data }) {
+  const [editing, setEditing] = useState(false);
+
+  if (editing) return <Form data={data} onCancel={() => setEditing(false)} />;
+
   return (
     <Card raised>
       <CardActionArea>
@@ -34,9 +40,9 @@ function AccountCard({ data }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Link href={`/${PATH}/${data.id}/edit`}>
-          <Button color="primary">Edit</Button>
-        </Link>
+        <Button color="primary" onClick={() => setEditing(true)}>
+          Edit
+        </Button>
         <Link
           href={`${PATH}/${data.id}`}
           data-confirm="Are you sure?"

@@ -23,7 +23,7 @@ const validate = (values) => {
   return errors;
 };
 
-function AccountForm({ data = {} }) {
+function AccountForm({ data = {}, onCancel }) {
   const formik = useFormik({
     initialValues: {
       name: data.name || "",
@@ -67,17 +67,10 @@ function AccountForm({ data = {} }) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          {data.id && (
-            <Link href={`/${PATH}`}>
-              <Button
-                color="default"
-                data-csrf={getCSRFToken()}
-                data-method="get"
-                data-to="/accounts"
-              >
-                Cancel
-              </Button>
-            </Link>
+          {onCancel && (
+            <Button color="default" onClick={onCancel}>
+              Cancel
+            </Button>
           )}
           <Link href={`/${PATH}/${data.id}/edit`}>
             <Button color="secondary" type="submit" variant="contained">
