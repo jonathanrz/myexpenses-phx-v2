@@ -13,25 +13,12 @@ const PATH = "accounts";
 function AccountList({ data }) {
   return (
     <Grid container spacing={2}>
-      <Grid item md={12}>
-        <Grid container justify="flex-end">
-          <Link href={`${PATH}/new`}>
-            <Button
-              variant="contained"
-              color="secondary"
-              startIcon={<AddIcon />}
-            >
-              New Account
-            </Button>
-          </Link>
-        </Grid>
-      </Grid>
       {data.map((account) => (
-        <Grid item md={2} key={account.id}>
+        <Grid item key={account.id}>
           <Card data={account} />
         </Grid>
       ))}
-      <Grid item md={2}>
+      <Grid item>
         <Form />
       </Grid>
     </Grid>

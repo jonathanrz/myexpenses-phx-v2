@@ -38,7 +38,7 @@ function AccountForm({ data = {} }) {
       }
       body.append("_csrf_token", getCSRFToken());
 
-      const url = `/accounts${data.id && "/" + data.id}`;
+      const url = `/accounts${data.id ? "/" + data.id : ""}`;
       const method = data.id ? "PUT" : "POST";
 
       fetch(url, {
@@ -47,7 +47,7 @@ function AccountForm({ data = {} }) {
         redirect: "manual",
       }).then((response) => {
         if (response.redirected || response.type === "opaqueredirect") {
-          window.location.href = response.url;
+          window.location.href = PATH;
         }
       });
     },
@@ -67,16 +67,18 @@ function AccountForm({ data = {} }) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Link href={`/${PATH}`}>
-            <Button
-              color="default"
-              data-csrf={getCSRFToken()}
-              data-method="get"
-              data-to="/accounts"
-            >
-              Cancel
-            </Button>
-          </Link>
+          {data.id && (
+            <Link href={`/${PATH}`}>
+              <Button
+                color="default"
+                data-csrf={getCSRFToken()}
+                data-method="get"
+                data-to="/accounts"
+              >
+                Cancel
+              </Button>
+            </Link>
+          )}
           <Link href={`/${PATH}/${data.id}/edit`}>
             <Button color="secondary" type="submit" variant="contained">
               {data.id ? "Save" : "Create"}
