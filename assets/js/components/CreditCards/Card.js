@@ -8,9 +8,9 @@ import Form from "./Form";
 
 const PATH = "credit_cards";
 
-function CreditCardCard({ data }) {
+function CreditCardCard({ data, accounts }) {
   return (
-    <CardModel data={data} path={PATH} Form={Form}>
+    <CardModel data={data} path={PATH} Form={Form} formParams={{ accounts }}>
       <Typography
         variant="body1"
         color="textPrimary"
@@ -18,6 +18,9 @@ function CreditCardCard({ data }) {
         gutterBottom
       >
         <b>Name:</b> {data.name}
+      </Typography>
+      <Typography variant="body1" color="textSecondary" component="p">
+        <b>Account:</b> {data.account.name}
       </Typography>
     </CardModel>
   );

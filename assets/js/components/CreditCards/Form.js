@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import FormikTextField from "../shared/form/FormikTextField";
-import FormikCurrencyField from "../shared/form/FormikCurrencyField";
+import FormikSelectField from "../shared/form/FormikSelectField";
 import FormModel from "../shared/FormModel";
 
 const PATH = "credit_cards";
@@ -15,13 +15,19 @@ const validate = (values) => {
   return errors;
 };
 
-function CreditCardForm({ data = {}, onCancel }) {
+function CreditCardForm({ data = {}, accounts, onCancel }) {
+  const options = useMemo(
+    () =>
+      accounts.map((account) => ({ value: account.id, label: account.name })),
+    [accounts]
+  );
   return (
     <FormModel
       data={data}
       onCancel={onCancel}
       initialValues={{
         name: data.name || "",
+        account_id: (data.account && data.account.id) || "",
       }}
       validate={validate}
       path={PATH}
@@ -30,6 +36,12 @@ function CreditCardForm({ data = {}, onCancel }) {
       {(formik) => (
         <React.Fragment>
           <FormikTextField name="name" label="Name" formik={formik} />
+          <FormikSelectField
+            name="account_id"
+            label="Account"
+            options={options}
+            formik={formik}
+          />
         </React.Fragment>
       )}
     </FormModel>

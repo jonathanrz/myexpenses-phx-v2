@@ -1,1 +1,1 @@
-<%= react_component("Components.CreditCards.List", %{data: @credit_cards }) %>
+<%= react_component("Components.CreditCards.List", %{data: @credit_cards, accounts: @accounts }) %>

@@ -9,7 +9,11 @@ defmodule MyexpensesPhxV2Web.CreditCardController do
 
   def index(conn, _params) do
     credit_cards = Data.list_credit_cards(conn.assigns.user)
-    render(conn, "index.html", credit_cards: credit_cards)
+
+    render(conn, "index.html",
+      credit_cards: credit_cards,
+      accounts: Data.list_accounts(conn.assigns.user)
+    )
   end
 
   def new(conn, _params) do

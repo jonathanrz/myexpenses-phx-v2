@@ -12,10 +12,13 @@ import ThemeProvider from "./ThemeProvider";
 
 const csrfToken = getCSRFToken();
 
-function CardModel({ data, path, Form, children }) {
+function CardModel({ data, path, Form, formParams, children }) {
   const [editing, setEditing] = useState(false);
 
-  if (editing) return <Form data={data} onCancel={() => setEditing(false)} />;
+  if (editing)
+    return (
+      <Form data={data} {...formParams} onCancel={() => setEditing(false)} />
+    );
 
   return (
     <ThemeProvider>
