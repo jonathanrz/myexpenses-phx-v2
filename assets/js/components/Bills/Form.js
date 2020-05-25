@@ -1,8 +1,9 @@
 import React from "react";
 
-import FormikTextField from "../shared/form/FormikTextField";
 import FormikCurrencyField from "../shared/form/FormikCurrencyField";
+import FormikDateField from "../shared/form/FormikDateField";
 import FormikNumberField from "../shared/form/FormikNumberField";
+import FormikTextField from "../shared/form/FormikTextField";
 import FormModel from "../shared/FormModel";
 
 const PATH = "bills";
@@ -15,6 +16,8 @@ const validate = (values) => {
   if (!values.value) errors.value = "Required";
   if (!values.due_day) errors.due_day = "Required";
 
+  console.log({ values });
+
   return errors;
 };
 
@@ -25,6 +28,8 @@ function BillForm({ data = {}, onCancel }) {
       onCancel={onCancel}
       initialValues={{
         name: data.name || "",
+        init_date: data.init_date,
+        end_date: data.end_date,
         value: data.value || 0,
         due_day: data.due_day || 0,
       }}
@@ -35,6 +40,8 @@ function BillForm({ data = {}, onCancel }) {
       {(formik) => (
         <React.Fragment>
           <FormikTextField name="name" label="Name" formik={formik} />
+          <FormikDateField name="init_date" label="Init Date" formik={formik} />
+          <FormikDateField name="end_date" label="End Date" formik={formik} />
           <FormikCurrencyField name="value" label="Value" formik={formik} />
           <FormikNumberField name="due_day" label="Due Day" formik={formik} />
         </React.Fragment>
