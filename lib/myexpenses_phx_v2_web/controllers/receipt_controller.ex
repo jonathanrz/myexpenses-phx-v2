@@ -9,7 +9,8 @@ defmodule MyexpensesPhxV2Web.ReceiptController do
 
   def index(conn, _params) do
     receipts = Data.list_receipts(conn.assigns.user)
-    render(conn, "index.html", receipts: receipts)
+
+    render(conn, "index.html", receipts: receipts, accounts: Data.list_accounts(conn.assigns.user))
   end
 
   def new(conn, _params) do
@@ -53,7 +54,11 @@ defmodule MyexpensesPhxV2Web.ReceiptController do
         |> redirect(to: Routes.receipt_path(conn, :show, receipt))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", receipt: receipt, changeset: changeset, accounts: load_accounts(conn))
+        render(conn, "edit.html",
+          receipt: receipt,
+          changeset: changeset,
+          accounts: load_accounts(conn)
+        )
     end
   end
 
@@ -70,6 +75,7 @@ defmodule MyexpensesPhxV2Web.ReceiptController do
     receipt = Data.get_receipt!(id)
 
     {:ok, _receipt} = Data.confirm_receipt(receipt)
+
     conn
     |> put_flash(:info, "Receipt confirmed successfully.")
     |> redirect(to: Routes.receipt_path(conn, :index))
@@ -79,6 +85,7 @@ defmodule MyexpensesPhxV2Web.ReceiptController do
     receipt = Data.get_receipt!(id)
 
     {:ok, _receipt} = Data.unconfirm_receipt(receipt)
+
     conn
     |> put_flash(:info, "Receipt unconfirmed successfully.")
     |> redirect(to: Routes.receipt_path(conn, :index))

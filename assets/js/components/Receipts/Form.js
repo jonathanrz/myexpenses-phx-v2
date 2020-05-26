@@ -1,37 +1,40 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import FormikCurrencyField from "../shared/form/FormikCurrencyField";
 import FormikDateField from "../shared/form/FormikDateField";
-import FormikNumberField from "../shared/form/FormikNumberField";
+import FormikSelectField from "../shared/form/FormikSelectField";
 import FormikTextField from "../shared/form/FormikTextField";
 import FormModel from "../shared/FormModel";
 
-const PATH = "bills";
-const MODEL = "bill";
+const PATH = "receipts";
+const MODEL = "receipt";
 
 const validate = (values) => {
   const errors = {};
 
   if (!values.name) errors.name = "Required";
-  if (!values.init_date) errors.init_date = "Required";
-  if (!values.end_date) errors.end_date = "Required";
+  if (!values.date) errors.date = "Required";
   if (!values.value) errors.value = "Required";
-  if (!values.due_day) errors.due_day = "Required";
+  if (!values.account_id) errors.account_id = "Required";
 
   return errors;
 };
 
-function BillForm({ data = {}, onCancel }) {
+function ReceiptForm({ data = {}, accounts, onCancel }) {
+  const options = useMemo(
+    () =>
+      accounts.map((account) => ({ value: account.id, label: account.name })),
+    [accounts]
+  );
   return (
     <FormModel
       data={data}
       onCancel={onCancel}
       initialValues={{
         name: data.name || "",
-        init_date: data.init_date,
-        end_date: data.end_date,
+        date: data.date,
         value: data.value || 0,
-        due_day: data.due_day || 0,
+        account_id: (data.account && data.account.id) || "",
       }}
       validate={validate}
       path={PATH}
@@ -40,14 +43,18 @@ function BillForm({ data = {}, onCancel }) {
       {(formik) => (
         <React.Fragment>
           <FormikTextField name="name" label="Name" formik={formik} />
-          <FormikDateField name="init_date" label="Init Date" formik={formik} />
-          <FormikDateField name="end_date" label="End Date" formik={formik} />
+          <FormikDateField name="date" label="Date" formik={formik} />
           <FormikCurrencyField name="value" label="Value" formik={formik} />
-          <FormikNumberField name="due_day" label="Due Day" formik={formik} />
+          <FormikSelectField
+            name="account_id"
+            label="Account"
+            options={options}
+            formik={formik}
+          />
         </React.Fragment>
       )}
     </FormModel>
   );
 }
 
-export default BillForm;
+export default ReceiptForm;

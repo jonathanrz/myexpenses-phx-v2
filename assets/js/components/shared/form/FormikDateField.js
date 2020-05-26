@@ -22,7 +22,6 @@ function FormikDateField({ name, label, options, formik, ...props }) {
   const hasError = Boolean(formik.touched[name] && formik.errors[name]);
 
   const value = useMemo(() => {
-    console.log({ values: formik.values, name });
     if (!formik.values[name]) return null;
 
     return moment(formik.values[name]);
