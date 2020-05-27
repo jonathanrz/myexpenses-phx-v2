@@ -1,1 +1,1 @@
-<%= react_component("Components.Receipts.Table", %{data: @receipts }) %>
+<%= react_component("Components.Receipts.List", %{data: @receipts, accounts: @accounts }) %>
